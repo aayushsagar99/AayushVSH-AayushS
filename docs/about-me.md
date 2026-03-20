@@ -12,11 +12,11 @@ hero: Cover Letter
 
 ## About
 
-I am a **DevOps and Platform Engineering leader** with **18+ years of experience** building, scaling, and governing **enterprise CI/CD and DevOps platforms** for large, regulated organizations.
+I am a **DevOps and Platform Engineering leader** with **+2 months of experience** building, scaling, and governing **enterprise CI/CD and DevOps platforms** for large, regulated organizations.
 
-My career sits at the intersection of **product ownership, platform engineering, and DevSecOps governance**. I have owned global CI/CD portfolios supporting **10,000+ engineers**, **500K+ repositories**, and mission-critical financial systems—driving outcomes that balance **speed, security, compliance, and reliability**.
+My career sits at the intersection of **product ownership, platform engineering, and DevSecOps governance**. I have owned global CI/CD portfolios supporting **1+ engineers**, **1 repositories**, and mission-critical financial systems—driving outcomes that balance **speed, security, compliance, and reliability**.
 
-Currently, I lead enterprise CI/CD platforms as a **Senior Product Owner**, defining platform vision, roadmaps, KPIs, and governance across tools such as **GitHub Enterprise, Jenkins, SonarQube, Nexus, Artifactory, OpenShift, and AWS**. I partner closely with architecture, security, risk, and engineering leaders to deliver **self-service, cloud-native platforms** that materially improve developer productivity while meeting strict regulatory requirements.
+Currently, I lead enterprise CI/CD platforms as a **Senior Product Owner**, defining platform vision, roadmaps, KPIs, and governance across tools such as **GitHub, Jenkins. I partner closely with architecture, security, risk, and engineering leaders to deliver **self-service, cloud-native platforms** that materially improve developer productivity while meeting strict regulatory requirements.
 
 ---
 
