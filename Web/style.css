@@ -1,0 +1,78 @@
+body {
+    background-color: rgb(100, 100, 100);
+    /* Fixed positioning fills the screen and prevents scrolling */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* This centers the .main-box perfectly */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Update .main-box to stack the display and buttons */
+.main-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between display and buttons */
+    width: 400px;
+    height: auto; /* Height adapts to content */
+    background-color: rgb(30, 30, 30);
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
+/* Ensure the display box looks like a screen */
+.Answer-box {
+    /* ... your existing styles ... */
+    
+    overflow: hidden;       /* Prevents text from physically leaving the box */
+    white-space: nowrap;    /* Keeps numbers on a single line */
+    text-overflow: clip;    /* Cuts off the text at the edge */
+    display: flex;
+    justify-content: flex-end; /* Keeps newest numbers visible on the right */
+    align-items: center;
+    
+    /* Optional: allow horizontal scrolling if it gets too long */
+    overflow-x: auto; 
+}
+
+/* Hide scrollbar for a cleaner look (Chrome/Safari) */
+.Answer-box::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Create the 4-column grid for buttons */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+/* Basic button styling */
+.btn {
+    padding: 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #444;
+    color: white;
+    transition: 0.2s;
+}
+
+.btn:hover { background: #666; }
+
+/* Special button colors */
+.btn-op { background-color: #ff9f43; } /* Operators */
+.btn-func { background-color: #a5a5a5; color: black; } /* AC/DEL */
+.btn-equals { 
+    background-color: #28a745; 
+    grid-row: span 2; /* Makes '=' taller */
+}
+.btn-zero { grid-column: span 2; } /* Makes '0' wider */
+
