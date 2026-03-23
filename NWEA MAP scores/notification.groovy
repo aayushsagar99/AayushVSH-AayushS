@@ -1,7 +1,7 @@
 node{
 stage('Email Notification'){
-mail bcc: '', body: '''Build successful!!!!
+mail bcc: '', body: '''Build successful for everyone!!!!
 Thanks,
-Sagar''', cc: '', from: 'aayushsagar99@gmail.com', replyTo: '', subject: 'Build successfull', to: 'vs.sagar@gmail.com'
-}
-}
+Sagar''', cc: '', from: '', replyTo: '', subject: 'Build successfull', to: 'vs.sagar@gmail.com'
+}}
+
