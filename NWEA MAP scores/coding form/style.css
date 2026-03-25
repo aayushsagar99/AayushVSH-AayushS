@@ -1,26 +1,182 @@
+/* 1. DEFINE THE ANIMATION */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(10px);
+    }to{
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+:root {
+    --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --text: #ffffff;
+    --border: rgba(255, 255, 255, 0.15);
+    --input-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* LIGHT MODE OVERRIDES */
+body.light-mode {
+    --bg: linear-gradient(135deg, #e0eafc, #cfdef3);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --text: #2c3e50;
+    --border: rgba(0, 0, 0, 0.1);
+    --input-bg: rgba(0, 0, 0, 0.05);
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;      /* Perfect horizontal center */
+    justify-content: center;   /* Perfect vertical center */
+    gap: 25px;                /* Gap between the two boxes */
     color: white;
     padding: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
+
 .form-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;         /* Keeps both containers exactly the same width */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-sizing: border-box;
+
+    /* 2. APPLY THE ANIMATION */
+    animation: fadeInUp 0.8s ease-out forwards;
 }
-input[type="text"] { width: 100%; padding: 10px; border-radius: 5px; border: none; }
+
+/* Stagger the second box slightly for a "wave" effect */
+.form-container:nth-child(2) {
+    animation-delay: 0.2s;
+    opacity: 0; /* Starts hidden until animation kicks in */
+}
+
+h1, h2 { margin-top: 0; font-weight: 300; letter-spacing: 1px; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    background: rgba(255,255,255,0.2);
+    border-color: #00d2ff;
+}
+
 button { 
-    width: 100%; margin-top: 15px; padding: 12px; border-radius: 8px; 
-    background: #00d2ff; font-weight: bold; cursor: pointer; border: none;
+    width: 100%; 
+    margin-top: 15px; 
+    padding: 14px; 
+    border-radius: 10px; 
+    background: linear-gradient(to right, #00d2ff, #3a7bd5);
+    color: white;
+    font-weight: bold; 
+    cursor: pointer; 
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+}
+
 table { width: 100%; margin-top: 15px; text-align: left; border-collapse: collapse; }
-th, td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+th, td { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+th { color: #00d2ff; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+/* 1. DEFINE THE PULSE ANIMATION */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(0, 210, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0);
+    }
+}
+
+/* 2. APPLY TO THE SUBMIT BUTTON */
+#submit-btn { 
+    width: 100%; 
+    margin-top: 15px; 
+    padding: 14px; 
+    border-radius: 10px; 
+    background: linear-gradient(to right, #00d2ff, #3a7bd5);
+    color: white;
+    font-weight: bold; 
+    cursor: pointer; 
+    border: none;
+    transition: all 0.3s ease;
+    
+    /* The Glow Effect */
+    animation: pulseGlow 2s infinite; 
+}
+
+/* 3. HOVER INTERACTION */
+#submit-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4);
+    animation: none; /* Stop pulsing when the user is hovering */
+}
+
+/* 4. ACTIVE CLICK EFFECT */
+#submit-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.copy-btn {
+    width: auto; margin: 0; padding: 4px 10px;
+    font-size: 0.7rem; background: var(--input-bg);
+    border: 1px solid var(--border);
+}
+
+.copy-btn.copied {
+    background: #00ffcc; color: #0f0c29; border-color: #00ffcc;
+}

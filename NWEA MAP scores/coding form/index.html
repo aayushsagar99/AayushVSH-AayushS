@@ -5,14 +5,75 @@
     <title>InsightForm Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
+    <button id="theme-toggle" title="Switch Theme">🌙</button>
+    
+    <thead>
+        <tr><th>Time</th><th>Lang</th><th>Rating</th><th></th></tr>
+    </thead>
+
 <body>
+    <button id="theme-toggle" title="Switch Theme">🌙</button>
+    <!-- FORM CONTAINER -->
     <div class="form-container">
         <h1>InsightForm</h1>
         <form id="my-form" action="http://localhost:8080/submit" method="POST">
             <label>Favorite Language?</label>
             <input type="text" id="language-choice" name="favorite_language" list="languages" placeholder="Type..." autocomplete="off">
             <datalist id="languages">
-                <option value="Python"><option value="Go"><option value="JavaScript">
+                <!-- The Heavy Hitters (Most Popular) -->
+                <option value="Python"></option>
+                <option value="JavaScript"></option>
+                <option value="TypeScript"></option>
+                <option value="Java"></option>
+                <option value="Go"></option> <!-- My Favorite! 🐹 -->
+                <option value="C#"></option>
+                <option value="C++"></option>
+                <option value="PHP"></option>
+                
+                <!-- Frontend & Design -->
+                <option value="HTML"></option>
+                <option value="CSS"></option>
+                <option value="Svelte"></option>
+                <option value="Dart"></option>
+
+                <!-- Systems & Performance -->
+                <option value="Rust"></option>
+                <option value="C"></option>
+                <option value="Zig"></option>
+                <option value="Odin"></option>
+                <option value="Assembly"></option>
+                <option value="Carbon"></option>
+
+                <!-- Data & Backend -->
+                <option value="SQL"></option>
+                <option value="R"></option>
+                <option value="Julia"></option>
+                <option value="Scala"></option>
+                <option value="Kotlin"></option>
+                <option value="Ruby"></option>
+                <option value="Perl"></option>
+
+                <!-- Functional & Logic -->
+                <option value="Elixir"></option>
+                <option value="Haskell"></option>
+                <option value="Clojure"></option>
+                <option value="F#"></option>
+                <option value="Erlang"></option>
+                <option value="Gleam"></option>
+                <option value="Lisp"></option>
+
+                <!-- Mobile & Hardware -->
+                <option value="Swift"></option>
+                <option value="Objective-C"></option>
+                <option value="Lua"></option>
+                <option value="Verilog"></option>
+                <option value="VHDL"></option>
+
+                <!-- Scripting & Infrastructure -->
+                <option value="Bash"></option>
+                <option value="PowerShell"></option>
+                <option value="Nix"></option>
+                <option value="Starlark"></option>
             </datalist>
 
             <div style="margin-top: 20px;">
