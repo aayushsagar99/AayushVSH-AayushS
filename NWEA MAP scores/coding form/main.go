@@ -69,3 +69,17 @@ func main() {
 	fmt.Println("Server running at http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
+func main() {
+    // Get the port from the environment (default to 8080 if not set)
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    http.HandleFunc("/submit", handleInsight)
+    http.HandleFunc("/api/insights", getInsights)
+    http.HandleFunc("/api/clear", clearHistory)
+
+    fmt.Printf("Server starting on port %s...\n", port)
+    http.ListenAndServe(":"+port, nil)
+}
