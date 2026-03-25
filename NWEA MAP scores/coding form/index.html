@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InsightForm Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>InsightForm</h1>
+        <form id="my-form" action="http://localhost:8080/submit" method="POST">
+            <label>Favorite Language?</label>
+            <input type="text" id="language-choice" name="favorite_language" list="languages" placeholder="Type..." autocomplete="off">
+            <datalist id="languages">
+                <option value="Python"><option value="Go"><option value="JavaScript">
+            </datalist>
+
+            <div style="margin-top: 20px;">
+                <label>Rating (1-10):</label>
+                <input type="range" id="rating" name="rating" min="1" max="10" value="5">
+                <div id="rating-val" style="color: #00d2ff; font-weight: bold;">5</div>
+            </div>
+
+            <button type="submit" id="submit-btn">Submit Insight</button>
+            <p id="success-msg" style="display: none; color: #00ffcc; margin-top: 10px;">Recorded! 🚀</p>
+        </form>
+    </div>
+
+    <!-- LIVE LIST CONTAINER -->
+    <div class="form-container" style="margin-top: 20px; max-width: 500px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Live History</h2>
+            <button id="clear-btn" style="width: auto; padding: 5px 10px; font-size: 0.7rem; background: #ff4b2b;">Clear</button>
+        </div>
+        <table id="insights-table">
+            <thead>
+                <tr><th>Time</th><th>Lang</th><th>Rating</th></tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
