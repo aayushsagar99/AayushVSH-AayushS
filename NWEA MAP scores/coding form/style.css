@@ -52,6 +52,8 @@ body.light-mode {
 
 
 body {
+    background: var(--bg); /* This is the secret sauce! */
+    transition: background 0.4s ease, color 0.4s ease; /* Makes the switch smooth */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     margin: 0;

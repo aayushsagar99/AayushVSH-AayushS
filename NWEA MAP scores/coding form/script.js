@@ -20,6 +20,26 @@ async function copyToClipboard(text, btn) {
     }, 1500);
 }
 
+const themeToggle = document.getElementById('theme-toggle');
+
+// 1. Check for saved theme on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.innerText = "☀️";
+}
+
+// 2. The Toggle Logic
+themeToggle.onclick = () => {
+    document.body.classList.toggle('light-mode');
+    
+    const isLight = document.body.classList.contains('light-mode');
+    themeToggle.innerText = isLight ? "☀️" : "🌙";
+    
+    // Save preference to browser memory
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+};
+
 
 async function loadInsights() {
     try {

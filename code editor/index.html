@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebEditor Pro</title>
+    <!-- Xterm.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net">
+    <style>
+        body { margin: 0; background: #1e1e1e; color: #cccccc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        header { height: 35px; background: #333333; display: flex; align-items: center; padding: 0 15px; font-size: 12px; border-bottom: 1px solid #252526; justify-content: space-between; }
+        main { display: flex; flex: 1; overflow: hidden; }
+        /* Sidebar & Git Status */
+        aside { width: 220px; background: #252526; display: flex; flex-direction: column; border-right: 1px solid #333; }
+        .sidebar-header { padding: 10px 15px; font-size: 11px; font-weight: bold; color: #6d6d6d; text-transform: uppercase; }
+        .file-item { padding: 5px 20px; cursor: pointer; font-size: 13px; display: flex; justify-content: space-between; }
+        .file-item:hover { background: #2a2d2e; }
+        .git-modified { color: #e2c08d; } /* Yellow for Modified */
+        .git-added { color: #81b88b; }    /* Green for Added */
+        /* Editor & Terminal */
+        #editor-container { flex: 1; overflow: hidden; }
+        .cm-editor { height: 100%; font-family: 'Fira Code', monospace; }
+        #terminal-panel { height: 250px; background: #000; border-top: 1px solid #444; padding: 5px; }
+        .folder-title {
+            cursor: pointer;
+            padding: 5px;
+            font-weight: bold;
+            color: #ccc;
+        }   
+        .folder-title:hover { background: #2a2d2e; }
+        .file-item {
+        padding: 3px 10px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #888;
+        }
+        .file-item:hover { color: #fff; background: #2a2d2e; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <span>WebEditor > <b id="current-filename">python.py</b></span>
+        <span id="lsp-status" style="color: #888;">LSP: Connecting...</span>
+    </header>
+    <main>
+        <aside>
+            <div class="sidebar-header">
+                EXPLORER 
+                <button onclick="createNewFile()" title="New File">+</button>
+            </div>
+            <div id="explorer">
+                <!-- Folder Example -->
+                <div class="folder">
+                <div class="folder-title" onclick="toggleFolder('src')">📁 src</div>
+                    <div id="src-content" class="folder-children" style="display:none; padding-left:15px;">
+                        <div class="file-item" onclick="openFile('src/main.py')">📄 main.py</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div id="editor-container"></div>
+    </main>
+    <div id="terminal-panel">
+        <div id="terminal"></div>
+    </div>
+
+    <script type="module">
+        import { EditorView, basicSetup } from "https://esm.sh";
+        import { python } from "https://esm.sh";
+        import { oneDark } from "https://esm.sh";
+        import { Terminal } from "https://esm.sh";
+
+        // Virtual Files
+        const files = {
+            "python.py": "import ssl\nprint('Hello')",
+            "server.py": "# Backend logic here",
+            "utils.py": "def helper():\n    return True",
+            "config.json": "{\n  \"theme\": \"dark\",\n  \"version\": \"1.0\"\n}"
+        };
+
+        let currentFile = "python.py";
+
+        // Initialize Editor
+        const view = new EditorView({
+            doc: files[currentFile],
+            extensions: [basicSetup, python(), oneDark],
+            parent: document.getElementById("editor-container")
+        });
+
+        // File Switching Logic
+        window.openFile = (name) => {
+            files[currentFile] = view.state.doc.toString();
+            view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: files[name] } });
+            currentFile = name;
+            document.getElementById('current-filename').innerText = name;
+        };
+
+        // Initialize Terminal
+        const term = new Terminal({ theme: { background: '#000000' }, fontSize: 13, fontFamily: 'monospace' });
+        term.open(document.getElementById('terminal'));
+        term.writeln("\x1b[32mTerminal session started.\x1b[0m");
+        term.write("$ ");
+    </script>
+</body>
+</html>

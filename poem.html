@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>The Final Build</title>
+        <style>
+            @keyframes typing { from { width: 0 } to { width: 100% } }
+            @keyframes blink { from, to { border-color: transparent } 50% { border-color: #6fffe9; } }
+            @keyframes bgShift {
+                0%, 25% { background: #0b132b; }
+                33%, 58% { background: #1c2541; }
+                66%, 90% { background: #3a506b; }
+                100% { background: #000; }
+            }
+
+            body {
+                background: #0b132b; color: #6fffe9;
+                font-family: 'Courier New', monospace;
+                display: flex; flex-direction: column;
+                justify-content: center; align-items: center;
+                height: 100vh; margin: 0; overflow: hidden;
+                transition: background 1s ease;
+            }
+
+            .animate { animation: bgShift 20s forwards; }
+
+            .line {
+                overflow: hidden; border-right: .15em solid orange;
+                white-space: nowrap; margin: 8px 0; width: 0; z-index: 5;
+                text-shadow: 0 0 8px rgba(111, 255, 233, 0.5);
+                pointer-events: none;
+            }
+
+            .html-tag { color: #ff5722; font-weight: bold; }
+            .css-tag  { color: #2196f3; font-weight: bold; }
+            .js-tag   { color: #ffeb3b; font-weight: bold; }
+
+            .animate .line { animation: typing 1.5s steps(35, end) forwards, blink .5s step-end 3; }
+            
+            /* Line Delays */
+            .animate .line:nth-child(1) { animation-delay: 0s; }
+            .animate .line:nth-child(2) { animation-delay: 1.5s; }
+            .animate .line:nth-child(3) { animation-delay: 3s; }
+            .animate .line:nth-child(4) { animation-delay: 4.5s; }
+            .animate .line:nth-child(5) { animation-delay: 6s; }
+            .animate .line:nth-child(6) { animation-delay: 7.5s; }
+            .animate .line:nth-child(7) { animation-delay: 9s; }
+            .animate .line:nth-child(8) { animation-delay: 10.5s; }
+            .animate .line:nth-child(9) { animation-delay: 12s; }
+            .animate .line:nth-child(10) { animation-delay: 13.5s; }
+            .animate .line:nth-child(11) { animation-delay: 15s; }
+            .animate .line:nth-child(12) { animation-delay: 16.5s; }
+
+            .bubble {
+                position: absolute; background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%; pointer-events: none; z-index: 1;
+            }
+
+            #final-portal { 
+                margin-top: 30px; font-size: 2em; opacity: 0; z-index: 10;
+                color: #fff; text-shadow: 0 0 20px #6fffe9;
+                cursor: pointer; background: none; border: none; font-family: inherit;
+                transition: transform 0.3s, text-shadow 0.3s;
+            }
+            #final-portal:hover { transform: scale(1.1); text-shadow: 0 0 40px #6fffe9, 0 0 60px #5bc0be; }
+
+            .animate #final-portal { animation: fadeIn 2s ease forwards 18.5s; }
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+            #secret-message {
+                display: none; position: fixed; inset: 0;
+                background: #000; color: #39FF14; /* Matrix Green */
+                justify-content: center; align-items: center;
+                font-size: 3em; z-index: 200; text-align: center;
+                padding: 20px;
+            }
+
+            #overlay { position: fixed;
+                inset: 0; background:
+                #0b132b; display: 
+                flex; justify-content: 
+                center; align-items: 
+                center; z-index: 100; 
+            }
+            button.start-btn { 
+                padding: 15px 30px; 
+                background: none; 
+                border: 2px solid #6fffe9; 
+                color: #6fffe9; 
+                cursor: pointer; 
+                font-size: 1.2em; 
+                border-radius: 8px; 
+            }
+            /* This ensures the mouse "sees" through the text to the bubbles */
+            #poem { pointer-events: none; }
+            #final-portal { pointer-events: auto; } /* Keep the button clickable! */
+            .bubble { position: absolute; top: 0; left: 0; }
+
+        </style>
+    </head>
+    <body>
+
+        <div id="overlay"><button class="start-btn" onclick="init()">Enter the Well</button></div>
+
+        <div id="poem">
+            <div class="line"><span class="html-tag">html</span>, I will do well.</div>
+            <div class="line"><span class="html-tag">html</span>, I'm in the well.</div>
+            <div class="line"><span class="html-tag">html</span>, I'll be your friend.</div>
+            <div class="line"><span class="html-tag">html</span>, we'll build it together.</div>
+
+            <div class="line"><span class="css-tag">css</span>, I’ll paint the well.</div>
+            <div class="line"><span class="css-tag">css</span>, break the dark spell.</div>
+            <div class="line"><span class="css-tag">css</span>, a blue gradient sky.</div>
+            <div class="line"><span class="css-tag">css</span>, look how we fly.</div>
+
+            <div class="line"><span class="js-tag">js</span>, I’ll climb from the well.</div>
+            <div class="line"><span class="js-tag">js</span>, there's a story to tell.</div>
+            <div class="line"><span class="js-tag">js</span>, click and we rise.</div>
+            <div class="line"><span class="js-tag">js</span>, the code never dies.</div>
+
+            <button id="final-portal" onclick="revealSecret()">&lt;html class="css"&gt;js&lt;/html&gt;</button>
+        </div>
+
+        <div id="secret-message">SYSTEM_UNLOCKED:<br>WE BUILT IT TOGETHER.</div>
+        
+        <script>
+            const bubbles = [];
+            let mouseX = -1000;
+            let mouseY = -1000;
+            
+            // Use 'document' for better coverage than 'window'
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+            });
+
+            class Bubble {
+                constructor() {
+                    this.el = document.createElement('div');
+                    this.el.className = 'bubble';
+                    document.body.appendChild(this.el);
+                    this.reset(true);
+                }
+
+                reset(isInitial = false) {
+                    this.size = Math.random() * 15 + 10;
+                    this.x = Math.random() * window.innerWidth;
+                    this.y = isInitial ? Math.random() * window.innerHeight : window.innerHeight + 50;
+                    
+                    this.baseSpeedY = -(Math.random() * 1.5 + 0.5);
+                    this.vx = (Math.random() - 0.5) * 1;
+                    this.vy = this.baseSpeedY;
+
+                    this.el.style.width = this.size + 'px';
+                    this.el.style.height = this.size + 'px';
+                }
+
+                update() {
+                    // Distance between mouse and bubble
+                    const dx = this.x - mouseX;
+                    const dy = this.y - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const radius = 150; // The "panic" zone
+
+                    if (dist < radius) {
+                        const force = (radius - dist) / radius;
+                        const angle = Math.atan2(dy, dx);
+                        
+                        // Push them away instantly
+                        this.vx += Math.cos(angle) * force * 5;
+                        this.vy += Math.sin(angle) * force * 5;
+                    }
+
+                    // Apply friction so they don't fly away forever
+                    this.vx *= 0.9;
+                    this.vy = (this.vy * 0.9) + (this.baseSpeedY * 0.1);
+
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Reset if off-screen
+                    if (this.y < -50) this.reset();
+                    if (this.x < -50) this.x = window.innerWidth + 40;
+                    if (this.x > window.innerWidth + 50) this.x = -40;
+
+                    this.el.style.transform = `translate(${this.x}px, ${this.y}px)`;
+                }
+            }
+
+            function init() {
+                document.getElementById('overlay').style.display = 'none';
+                document.body.classList.add('animate');
+                for (let i = 0; i < 50; i++) bubbles.push(new Bubble());
+                animate();
+            }
+
+            function animate() {
+                bubbles.forEach(b => b.update());
+                requestAnimationFrame(animate);
+            }
+
+            function revealSecret() {
+                document.getElementById('secret-message').style.display = 'flex';
+                document.body.style.background = '#000';
+            }
+
+        </script>
+    </body>
+</html>
