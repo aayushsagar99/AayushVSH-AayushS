@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google - About</title>
+    <link rel="stylesheet" href="../css/about.css">
+    <script src="../js/confetti.js"></script>
+</head>
+<body>
+    
+    <h1 class="h1">
+        <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>
+    </h1>
+    <h2 class="h2">Our Mission & Story</h2>
+
+    <div class="content-wrapper">
+        <p class="main-description">
+            Google's mission is to <strong>organize the world's information</strong> and make it universally accessible and useful. What started in a California garage in 1998 has grown into a global leader in AI, search, and cloud computing.
+        </p>
+
+        <div class="facts-grid">
+            <div class="fact-item">
+                <strong>Founded</strong>
+                September 4, 1998, by Larry Page and Sergey Brin at Stanford University.
+            </div>
+            <div class="fact-item">
+                <strong>The Name</strong>
+                Derived from "googol"—the mathematical term for a 1 followed by 100 zeros.
+            </div>
+            <div class="fact-item">
+                <strong>First Server</strong>
+                The very first Google server was famously built inside a case made of <strong>Lego bricks</strong>.
+            </div>
+            <div class="fact-item">
+                <strong>The Verb</strong>
+                In 2006, "Google" was officially added to the Oxford English Dictionary as a verb.
+            </div>
+        </div>
+        <div class="server-exhibit">
+            <h3>The Piece of History</h3>
+            <img src="../images/lego-server.jpg" alt="Original Google LEGO Server" class="server-image">
+            <p class="image-caption">The original storage system at Stanford University, housed in LEGO bricks.</p>
+        </div>
+        <div class="video-container">
+            <h3>Watch the Story</h3>
+            <div class="video-wrapper">
+                <iframe 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/watch?v=EjN5avRvApk" 
+                    title="Google History" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+            <p class="video-caption">
+                Video blocked? <a href="https://www.youtube.com/watch?v=EjN5avRvApk" target="_blank" style="color: #4285F4; text-decoration: none; font-weight: bold;">Click here to watch the history of Google on YouTube.</a>
+            </p>
+        </div>
+        <a href="home.html" style="position: absolute; top: 20px; left: 20px;">← Back to Search</a>
+
+
+    </div>
+
+    <footer>
+        &copy; 2026 Google LLC | Headquartered in Mountain View, CA
+    </footer>
+    <button id="final-portal" class="google-btn">💡 Click for a Google Fun Fact!</button>
+
+
+    <!-- The Modal (Pop-up) -->
+    <div id="factModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 class="blue">Did You Know?</h3>
+        <p>The very first Google server was famously built inside a case made of <strong>LEGO bricks</strong>! 🧱</p>
+        <p style="font-size: 14px; color: #70757a;">Co-founders Larry Page and Sergey Brin used the bricks because they were a cheap, expandable way to hold ten 4GB hard drives for their new search engine.</p>
+    </div>
+    </div>
+
+</body>
+</html>

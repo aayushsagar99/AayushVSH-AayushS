@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import os
-import time
+
 
 # --- INITIAL SETTINGS ---
 FILE_NAME = "map_growth_data.csv"

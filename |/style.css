@@ -1,0 +1,7 @@
+.i{
+    
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    padding: 100%;
+    margin: 0 auto;
+}

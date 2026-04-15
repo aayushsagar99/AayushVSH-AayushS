@@ -16,15 +16,21 @@
     --text: #ffffff;
     --border: rgba(255, 255, 255, 0.15);
     --input-bg: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --button-bg: linear-gradient(to right, #00d2ff, #3a7bd5);
+    --shadow-color: rgba(0, 0, 0, 0.37);
 }
 
 /* LIGHT MODE OVERRIDES */
 body.light-mode {
     --bg: linear-gradient(135deg, #e0eafc, #cfdef3);
-    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-bg: rgba(255, 255, 255, 0.9);
     --text: #2c3e50;
     --border: rgba(0, 0, 0, 0.1);
-    --input-bg: rgba(0, 0, 0, 0.05);
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --button-bg: linear-gradient(to right, #5b8df9, #89c3ff);
+    --shadow-color: rgba(0, 0, 0, 0.15);
 }
 
 #theme-toggle {
@@ -50,12 +56,22 @@ body.light-mode {
     transform: scale(1.1);
 }
 
+/* Sun/Moon Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+#theme-toggle.animate {
+    animation: spin 0.5s ease;
+}
+
 
 body {
     background: var(--bg); /* This is the secret sauce! */
+    color: var(--text);
     transition: background 0.4s ease, color 0.4s ease; /* Makes the switch smooth */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -63,22 +79,21 @@ body {
     align-items: center;      /* Perfect horizontal center */
     justify-content: center;   /* Perfect vertical center */
     gap: 25px;                /* Gap between the two boxes */
-    color: white;
     padding: 20px;
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
 .form-container {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 30px;
     border-radius: 20px;
     width: 100%;
     max-width: 450px;         /* Keeps both containers exactly the same width */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
     box-sizing: border-box;
 
     /* 2. APPLY THE ANIMATION */
@@ -97,9 +112,9 @@ input {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.1);
-    color: white;
+    border: 1px solid var(--border);
+    background: var(--input-bg);
+    color: var(--text);
     outline: none;
     transition: 0.3s;
 }
@@ -114,8 +129,8 @@ button {
     margin-top: 15px; 
     padding: 14px; 
     border-radius: 10px; 
-    background: linear-gradient(to right, #00d2ff, #3a7bd5);
-    color: white;
+    background: var(--button-bg);
+    color: var(--text);
     font-weight: bold; 
     cursor: pointer; 
     border: none;
@@ -128,7 +143,7 @@ button:hover {
 }
 
 table { width: 100%; margin-top: 15px; text-align: left; border-collapse: collapse; }
-th, td { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+th, td { padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text); }
 th { color: #00d2ff; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
 /* 1. DEFINE THE PULSE ANIMATION */
 @keyframes pulseGlow {

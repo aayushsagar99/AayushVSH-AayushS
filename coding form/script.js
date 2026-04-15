@@ -5,6 +5,7 @@ const ratingDisplay = document.getElementById('rating-val');
 
 // Update slider value display
 ratingSlider.oninput = () => ratingDisplay.innerText = ratingSlider.value;
+ratingDisplay.innerText = ratingSlider.value;
 
 // Fetch and display data
 // Function to handle the actual copying
@@ -38,6 +39,10 @@ themeToggle.onclick = () => {
     
     // Save preference to browser memory
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+    // Add spin animation
+    themeToggle.classList.add('animate');
+    setTimeout(() => themeToggle.classList.remove('animate'), 500);
 };
 
 
@@ -70,7 +75,8 @@ form.onsubmit = async (e) => {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
     });
     form.reset();
-    ratingDisplay.innerText = "5";
+    ratingSlider.value = 5;
+    ratingDisplay.innerText = ratingSlider.value;
     loadInsights();
 };
 
@@ -81,13 +87,5 @@ document.getElementById('clear-btn').onclick = async () => {
         loadInsights();
     }
 };
-
-const themeToggle = document.getElementById('theme-toggle');
-
-themeToggle.onclick = () => {
-    document.body.classList.toggle('light-mode');
-    themeToggle.innerText = document.body.classList.contains('light-mode') ? "☀️" : "🌙";
-};
-
 
 loadInsights(); // Initial load
