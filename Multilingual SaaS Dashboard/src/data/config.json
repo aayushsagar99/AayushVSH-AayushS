@@ -1,0 +1,10 @@
+{
+  "appName": "GlobalStack Dashboard",
+  "version": "1.0.4",
+  "features": {
+    "showRevenue": true,
+    "darkModeEnabled": true,
+    "allowExport": false
+  },
+  "chartColors": ["#4a90e2", "#50e3c2", "#b8e986"]
+}

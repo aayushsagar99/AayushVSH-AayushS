@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "title": "SaaS Admin",
+    "home": "Inicio",
+    "analytics": "Analítica"
+  },
+  "dashboard": {
+    "welcome": "¡Bienvenido de nuevo!",
+    "total_sales": "Ventas Totales",
+    "analytics_title": "Resumen de Ventas"
+  }
+}

@@ -1,0 +1,22 @@
+my-complex-app/
+├── public/                # Static assets served directly
+│   ├── images/            # .jpg, .png, .svg assets
+│   └── favicon.ico
+├── src/                   # Core source code
+│   ├── assets/            # Global styles and shared media
+│   │   ├── fonts/
+│   │   └── styles/        # Global CSS / SCSS files
+│   ├── components/        # Reusable UI parts (buttons, cards)
+│   ├── data/              # Static data sources
+│   │   └── config.json    # Application settings/metadata
+│   ├── i18n/              # Internationalization
+│   │   ├── en.json        # English translation keys
+│   │   └── es.json        # Spanish translation keys
+│   ├── services/          # API logic and utility functions
+│   │   └── api.js         # Fetching logic
+│   ├── views/             # Page-level components
+│   │   └── Dashboard.js
+│   └── index.js           # Main entry point
+├── .env            # Environment secrets (API keys)
+├── package.json   # Dependencies and scripts
+└── plan                  

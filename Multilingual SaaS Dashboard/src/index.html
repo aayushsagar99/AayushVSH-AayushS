@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Dashboard</title>
+    <link rel="stylesheet" href="./assets/styles/main.css">
+</head>
+<body>
+    <nav id="sidebar">
+        <h2 data-i18n="nav.title">Dashboard</h2>
+        <ul>
+            <li data-i18n="nav.home">Home</li>
+            <li data-i18n="nav.analytics">Analytics</li>
+        </ul>
+        <!-- Language Switcher -->
+        <select id="lang-select">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+        </select>
+    </nav>
+
+    <main id="content">
+        <header>
+            <h1 data-i18n="dashboard.welcome">Welcome</h1>
+        </header>
+        <section class="stats-grid">
+            <div class="card">
+                <p data-i18n="dashboard.total_sales">Total Sales</p>
+                <span id="sales-value">$0</span>
+                <div class="card chart-container">
+                    <h3 data-i18n="dashboard.analytics_title">Sales Overview</h3>
+                    <canvas id="salesChart"></canvas>
+                </div>
+
+                <!-- Add the Chart.js Library via CDN (put this above your app.js script) -->
+                <script src="https://jsdelivr.net"></script>
+                <script type="module" src="./js/app.js"></script>
+
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>

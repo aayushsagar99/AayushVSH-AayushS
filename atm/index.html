@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM</title>
+
+    <Style>
+        body{
+            background-color: black;
+            
+        }
+        .text{
+            color: #40eb1c;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .button-container {
+            margin: 20px 0;
+        }
+        .atm-button {
+            background-color: #40eb1c;
+            color: black;
+            border: 2px solid #40eb1c;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .atm-button:hover {
+            background-color: black;
+            color: #40eb1c;
+        }
+        input[type="text"], input[type="password"] {
+            background-color: black;
+            color: #40eb1c;
+            border: 2px solid #40eb1c;
+            padding: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 10px 0;
+        }
+    </Style>
+</head>
+<body>
+    <div class="text">>>> Welcome to Multi-User ATM</div>
+    
+    <div class="text">>>> Enter a new PIN to Sign Up, or enter 1234 to Log In.</div>
+    <input placeholder="Enter PIN" type="password" name="" id="passwordInput">
+    <div class="button-container">
+        <button type="button" class="atm-button" id="signInBtn">Sign Up</button>
+        <button type="button" class="atm-button" id="logInBtn">Log In</button>
+    </div>
+    <a href="">Version 1.0.0</a>
+</body>
+<script>
+    // ATM System JavaScript with Multiple Accounts
+    const savedAccounts = localStorage.getItem('atm_accounts');
+    const accounts = savedAccounts ? JSON.parse(savedAccounts) : {
+        '1234': { name: 'Test User', balance: 1000 }
+    };
+
+    function saveAccounts() {
+        localStorage.setItem('atm_accounts', JSON.stringify(accounts));
+    }
+    
+    let currentUser = null;
+    let isLoggedIn = false;
+    let passwordInput = null;
+    let signInBtn = null;
+    let logInBtn = null;
+    const body = document.body;
+
+    function initATM() {
+        passwordInput = document.getElementById('passwordInput');
+        signInBtn = document.getElementById('signInBtn');
+        logInBtn = document.getElementById('logInBtn');
+
+        if (!passwordInput || !signInBtn || !logInBtn) {
+            console.error('ATM initialization failed: missing DOM elements');
+            return;
+        }
+
+        passwordInput.focus();
+
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        signInBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSignUpForm();
+        });
+        logInBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            checkPassword();
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', initATM);
+    } else {
+        initATM();
+    }
+
+    function showSignUpForm() {
+        body.innerHTML = `
+            <div class="text">>>> Sign Up</div>
+            <div class="text">>>> Enter a new PIN:</div>
+            <input placeholder="New PIN" type="password" id="signUpPinInput">
+            <div class="text">>>> Enter your name:</div>
+            <input placeholder="Name" type="text" id="signUpNameInput">
+            <div class="button-container">
+                <button type="button" class="atm-button" id="createAccountBtn">Create Account</button>
+                <button type="button" class="atm-button" id="cancelRegistrationBtn">Cancel</button>
+            </div>
+        `;
+
+        const pinInput = document.getElementById('signUpPinInput');
+        const nameInput = document.getElementById('signUpNameInput');
+        const createAccountBtn = document.getElementById('createAccountBtn');
+        const cancelBtn = document.getElementById('cancelRegistrationBtn');
+
+        pinInput.focus();
+        pinInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                createAccount();
+            }
+        });
+        nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                createAccount();
+            }
+        });
+
+        createAccountBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            createAccount();
+        });
+
+        cancelBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            location.reload();
+        });
+    }
+
+    function createAccount() {
+        const pinInput = document.getElementById('signUpPinInput');
+        const nameInput = document.getElementById('signUpNameInput');
+        const pin = pinInput.value.trim();
+        const accountName = nameInput.value.trim();
+
+        if (!pin) {
+            showMessage(">>> Enter a PIN to register.");
+            pinInput.focus();
+            return;
+        }
+        if (!accountName) {
+            showMessage(">>> Enter a name to create the account.");
+            nameInput.focus();
+            return;
+        }
+        if (accounts[pin]) {
+            showMessage(">>> PIN already registered. Use Log In or choose a different PIN.");
+            pinInput.value = "";
+            pinInput.focus();
+            return;
+        }
+
+        accounts[pin] = { name: accountName, balance: 0 };
+        saveAccounts();
+        currentUser = pin;
+        isLoggedIn = true;
+        showMessage(`>>> Account created for ${accountName}!`);
+        setTimeout(() => showATMMenu(), 1500);
+    }
+
+    function checkPassword() {
+        const enteredPassword = passwordInput.value.trim();
+        
+        if (accounts[enteredPassword]) {
+            currentUser = enteredPassword;
+            isLoggedIn = true;
+            showMessage(`>>> Welcome ${accounts[currentUser].name}!`);
+            setTimeout(() => showATMMenu(), 1500);
+        } else {
+            showMessage(">>> Incorrect Password. Try again.");
+            passwordInput.value = "";
+            passwordInput.focus();
+        }
+    }
+
+    function showMessage(message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'text';
+        messageDiv.textContent = message;
+        body.appendChild(messageDiv);
+        body.scrollTop = body.scrollHeight;
+    }
+
+    function showATMMenu() {
+        // Clear the screen
+        body.innerHTML = '';
+        
+        // Add menu
+        const menuHTML = `
+            <div class="text">>>> ATM Menu - Welcome ${accounts[currentUser].name}</div>
+            <div class="text">>>> 1. Check Balance</div>
+            <div class="text">>>> 2. Withdraw Money</div>
+            <div class="text">>>> 3. Deposit Money</div>
+            <div class="text">>>> 4. Transfer Money</div>
+            <div class="text">>>> 5. Exit</div>
+            <div class="text">>>> Choose an option (1-5):</div>
+            <input placeholder="Type option" type="text" id="menuChoice">
+        `;
+        
+        body.innerHTML = menuHTML;
+        
+        // Add event listener for menu choice
+        const menuInput = document.getElementById('menuChoice');
+        menuInput.focus();
+        menuInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleMenuChoice(menuInput.value);
+            }
+        });
+    }
+
+    function handleMenuChoice(choice) {
+        switch(choice) {
+            case '1':
+                showBalance();
+                break;
+            case '2':
+                showWithdrawMenu();
+                break;
+            case '3':
+                showDepositMenu();
+                break;
+            case '4':
+                showTransferMenu();
+                break;
+            case '5':
+                logout();
+                break;
+            default:
+                showMessage(">>> Invalid option. Please choose 1-5.");
+                showATMMenu();
+        }
+    }
+
+    function showBalance() {
+        body.innerHTML = '';
+        const balanceHTML = `
+            <div class="text">>>> Current Balance: $${accounts[currentUser].balance}</div>
+            <div class="text">>>> Press Enter to return to menu</div>
+            <input type="text" id="returnToMenu" style="opacity: 0;">
+        `;
+        
+        body.innerHTML = balanceHTML;
+        document.getElementById('returnToMenu').focus();
+        document.getElementById('returnToMenu').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                showATMMenu();
+            }
+        });
+    }
+
+    function showWithdrawMenu() {
+        body.innerHTML = '';
+        const withdrawHTML = `
+            <div class="text">>>> Withdraw Money</div>
+            <div class="text">>>> Current Balance: $${accounts[currentUser].balance}</div>
+            <div class="text">>>> Enter amount to withdraw:</div>
+            <input placeholder="Amount" type="number" id="withdrawAmount">
+        `;
+        
+        body.innerHTML = withdrawHTML;
+        document.getElementById('withdrawAmount').focus();
+        document.getElementById('withdrawAmount').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const amount = parseFloat(document.getElementById('withdrawAmount').value);
+                if (isNaN(amount) || amount <= 0) {
+                    showMessage(">>> Invalid amount. Please enter a positive number.");
+                    showWithdrawMenu();
+                } else if (amount > accounts[currentUser].balance) {
+                    showMessage(">>> Insufficient funds. Your balance is $" + accounts[currentUser].balance);
+                    showWithdrawMenu();
+                } else {
+                    accounts[currentUser].balance -= amount;
+                    saveAccounts();
+                    showMessage(">>> Withdrawal successful! New balance: $" + accounts[currentUser].balance);
+                    setTimeout(() => showATMMenu(), 2000);
+                }
+            }
+        });
+    }
+
+    function showDepositMenu() {
+        body.innerHTML = '';
+        const depositHTML = `
+            <div class="text">>>> Deposit Money</div>
+            <div class="text">>>> Current Balance: $${accounts[currentUser].balance}</div>
+            <div class="text">>>> Enter amount to deposit:</div>
+            <input placeholder="Amount" type="number" id="depositAmount">
+        `;
+        
+        body.innerHTML = depositHTML;
+        document.getElementById('depositAmount').focus();
+        document.getElementById('depositAmount').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const amount = parseFloat(document.getElementById('depositAmount').value);
+                if (isNaN(amount) || amount <= 0) {
+                    showMessage(">>> Invalid amount. Please enter a positive number.");
+                    showDepositMenu();
+                } else {
+                    accounts[currentUser].balance += amount;
+                    saveAccounts();
+                    showMessage(">>> Deposit successful! New balance: $" + accounts[currentUser].balance);
+                    setTimeout(() => showATMMenu(), 2000);
+                }
+            }
+        });
+    }
+
+    function showTransferMenu() {
+        body.innerHTML = '';
+        
+        // Get available recipients (all accounts except current user)
+        const recipients = Object.keys(accounts).filter(pin => pin !== currentUser);
+        
+        let recipientOptions = '';
+        recipients.forEach((pin, index) => {
+            recipientOptions += `<div class="text">>>> ${index + 1}. ${accounts[pin].name} (${pin})</div>`;
+        });
+        
+        const transferHTML = `
+            <div class="text">>>> Transfer Money</div>
+            <div class="text">>>> Your Balance: $${accounts[currentUser].balance}</div>
+            <div class="text">>>> Select recipient:</div>
+            ${recipientOptions}
+            <div class="text">>>> Enter recipient number (1-${recipients.length}):</div>
+            <input placeholder="Recipient number" type="number" id="recipientChoice" min="1" max="${recipients.length}">
+        `;
+        
+        body.innerHTML = transferHTML;
+        document.getElementById('recipientChoice').focus();
+        
+        document.getElementById('recipientChoice').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const choice = parseInt(document.getElementById('recipientChoice').value);
+                if (choice >= 1 && choice <= recipients.length) {
+                    const recipientPin = recipients[choice - 1];
+                    showTransferAmountMenu(recipientPin);
+                } else {
+                    showMessage(">>> Invalid recipient choice.");
+                    showTransferMenu();
+                }
+            }
+        });
+    }
+
+    function showTransferAmountMenu(recipientPin) {
+        body.innerHTML = '';
+        const transferAmountHTML = `
+            <div class="text">>>> Transfer to ${accounts[recipientPin].name}</div>
+            <div class="text">>>> Your Balance: $${accounts[currentUser].balance}</div>
+            <div class="text">>>> Enter amount to transfer:</div>
+            <input placeholder="Amount" type="number" id="transferAmount">
+        `;
+        
+        body.innerHTML = transferAmountHTML;
+        document.getElementById('transferAmount').focus();
+        
+        document.getElementById('transferAmount').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const amount = parseFloat(document.getElementById('transferAmount').value);
+                if (isNaN(amount) || amount <= 0) {
+                    showMessage(">>> Invalid amount. Please enter a positive number.");
+                    showTransferAmountMenu(recipientPin);
+                } else if (amount > accounts[currentUser].balance) {
+                    showMessage(">>> Insufficient funds. Your balance is $" + accounts[currentUser].balance);
+                    showTransferAmountMenu(recipientPin);
+                } else {
+                    // Perform the transfer
+                    accounts[currentUser].balance -= amount;
+                    accounts[recipientPin].balance += amount;
+                    saveAccounts();
+                    
+                    showMessage(`>>> Transfer successful! $${amount} sent to ${accounts[recipientPin].name}`);
+                    showMessage(`>>> Your new balance: $${accounts[currentUser].balance}`);
+                    setTimeout(() => showATMMenu(), 3000);
+                }
+            }
+        });
+    }
+
+    function logout() {
+        isLoggedIn = false;
+        currentUser = null;
+        location.reload(); // Reload the page to start over
+    }
+
+</script>
+</html>

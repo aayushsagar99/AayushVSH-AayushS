@@ -1,0 +1,77 @@
+:root {
+  --sidebar-width: 240px;
+  --bg-color: #f4f7f6;
+  --text-color: #333;
+  --accent: #4a90e2;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex; /* This puts the sidebar and main content side-by-side */
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+#sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+}
+
+main {
+  flex-grow: 1;
+  padding: 40px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 300px;
+}
+
+#lang-select {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#lang-select option {
+  background: #2c3e50; /* Matches your sidebar color */
+  color: white;
+}
+
+:root {
+  /* These variables change based on the theme */
+  --bg-main: #f4f7f6;
+  --bg-card: #ffffff;
+  --text-primary: #333333;
+  --sidebar-color: #2c3e50;
+  --accent-color: #4a90e2;
+}
+
+[data-theme="dark"] {
+  --bg-main: #1a1a1a;
+  --bg-card: #2d2d2d;
+  --text-primary: #f4f7f6;
+  --sidebar-color: #111111;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: all 0.3s ease; /* Makes the switch look smooth! */
+}
+
+.card {
+  background-color: var(--bg-card);
+}
