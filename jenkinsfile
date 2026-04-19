@@ -1,0 +1,23 @@
+pipeline {
+    agent any // Where to run (any available agent)
+
+    stages {
+        stage('Build') { 
+            steps {
+                echo 'Building...'
+                // Run shell commands like: sh './build.sh'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Run tests like: sh 'make test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+}
