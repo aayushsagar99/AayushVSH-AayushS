@@ -3,9 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Version 1.0.0</title>
+    <title>Multi-User ATM - Version 1.0.0 Changelog</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00FF00; /* Neon green to match your UI */
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #00FF00;
+            padding: 20px;
+            box-shadow: 0 0 10px #00FF00;
+        }
+
+        h1 {
+            border-bottom: 2px solid #00FF00;
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            color: #8800FF; /* Purple accent to match your version text */
+            font-size: 1.2rem;
+            margin-top: 25px;
+        }
+
+        ul {
+            list-style-type: "> ";
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #8800FF;
+            text-decoration: none;
+            border: 1px solid #8800FF;
+            padding: 5px 15px;
+        }
+
+        .back-link:hover {
+            background-color: #8800FF;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    
+
+<div class="container">
+    <h1>>>> SYSTEM UPDATE: VERSION 1.0.0</h1>
+    <p>Official release of the Multi-User ATM interface.</p>
+
+    <h2>NEW FEATURES</h2>
+    <ul>
+        <li>Implemented multi-user login functionality using 4-digit PINs.</li>
+        <li>New "Sign Up" flow for first-time users.</li>
+        <li>Classic terminal-inspired visual interface.</li>
+    </ul>
+
+    <h2>FIXES & IMPROVEMENTS</h2>
+    <ul>
+        <li>Optimized PIN verification response time.</li>
+        <li>Fixed a visual bug where the "Enter PIN" field would lose focus.</li>
+        <li>Enhanced security protocols for session management.</li>
+    </ul>
+
+    <a href="index.html" class="back-link">RETURN TO ATM</a>
+</div>
+
 </body>
 </html>
