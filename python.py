@@ -1,7 +1,2 @@
-import my_script
-
-def main():
-    my_script.main()
-
-if __name__ == "__main__":
-    main()
+with open("example.bin", "wb") as f:
+    f.write(b"\x48\x65\x6c\x6c\x6f") # Writes "Hello" in binary

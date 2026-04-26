@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Info</title>
+    <style>
+        body {
+            background-color: hsla(281, 100%, 78%, 0.425);
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+        .Title {
+            color: aqua;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        .button{
+            background-color: aqua;
+            color: red;
+            position: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="Title">Welcome to Safe Info</h1>
+    <button class="button" onclick="info()">Start entering information</button>
+
+</body>
+<script>
+    info = () => {
+        window.location.href = "info.html";
+    }
+</script>
+</html>

@@ -1,0 +1,49 @@
+person:
+  information:
+    name:
+      First_name:
+         "Aayush"
+      Last_name: 
+        "Sagar"
+    Gender: 
+      "Male"
+    Emails: 
+      work: 
+        "vs.sagar@gmail.com"
+      personal: 
+        "aayushsagar99@gmail.com"
+    Phone number: 
+      mobile: 
+        "(781) 884-7848"
+    Birthday: 
+      "14 October 2017"
+    language: 
+      "English"
+    address:
+      Home address: 
+        Street: 
+          "304 Lionel Dr"
+        City: 
+          "Grayslake"
+        State: 
+          "ILLINOIS"
+        Zip: 
+          "60030"
+      Work address:
+        street: 
+          "2500 Lake Cook Rd"
+        city: 
+          "Riverwoods"
+        state: 
+          "IL"
+    age: 
+      8
+    price: 
+      122.50
+    student:
+     true
+    hobbies: 
+      - MATH
+      - Coding
+      - Hiking
+      - Camping

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- We use 'lib:' as a prefix so these tags are unique to our library -->
+<lib:library xmlns:lib="http://mylibrary.com">
+
+  <lib:book id="101">
+    <lib:title>Price_1</lib:title>
+    <lib:author>Aayush</lib:author>
+    <lib:year>2026</lib:year>
+    <lib:month>4</lib:month>
+    <lib:date>12</lib:date>
+    <lib:price currency="USD">122.00</lib:price>
+  </lib:book>
+
+  <lib:book id="102">
+    <lib:title>Price_2</lib:title>
+    <lib:author>Aayush</lib:author>
+    <lib:year>2026</lib:year>
+    <lib:month>4</lib:month>
+    <lib:date>13</lib:date>
+    <lib:price currency="USD">122.50</lib:price>
+  </lib:book>
+
+</lib:library>

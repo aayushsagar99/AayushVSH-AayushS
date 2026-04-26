@@ -62,9 +62,9 @@ if i==10 and j==20:
     print("i//j=",i//j)
     print("i%j=",i%j)
     print("i**j=",i**j)
-else:
-   print("404 Error!")
-   print("PAGE NOT FOUND!")
+# else:
+#    print("404 Error!")
+#    print("PAGE NOT FOUND!")
 # 2. Write a program to swap two numbers?
 g=5
 h=10
