@@ -1,0 +1,16 @@
+:root{
+    --size:25%;
+}
+.footer github{
+    position:fixed;
+    left:auto;
+    top: 20px;
+    width: var(--size);
+    height: var(--size);
+}
+.footer jenkins{
+    position:fixed;
+    left: 100%;
+    width: var(--size);
+    height: var(--size);
+}

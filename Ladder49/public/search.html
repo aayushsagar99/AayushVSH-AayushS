@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladder49 - Search</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <!-- Main Search Interface -->
+    <div class="search-container" id="search-container">
+        <div class="logo">Search</div>
+        <div class="search-box">
+            <search><input type="text" id="user-input" placeholder="Search or ask anything..."></search>
+            <button onclick="executeSearch()">Search</button>
+        </div>
+    </div>
+
+    <!-- Results Area (Hidden Initially) -->
+    <div id="results-area" class="hidden">
+        <div class="ai-summary">
+            <h3>AI Overview</h3>
+            <p id="ai-text">Thinking...</p>
+        </div>
+        <div class="web-links">
+            <h3>Sources</h3>
+            <ul id="link-list"></ul>
+        </div>
+    </div>
+
+</body>
+<script src="../js/search.js"></script>
+</html>

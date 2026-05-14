@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logout</title>
+    <style>
+        .link{
+            color:lab(30.07% 75.04 -101.43)
+        }
+
+        .logout{
+            font-family:monospace;
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform:translate(50%, 50%);
+            background-color:red;
+            color:white;
+            padding: 50px, 200px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <dialog class="logout"><p>Are you sure you want to leave <a class="link" href="../../public/web/index.html">Ladder49</a>?</p></dialog>
+    <button onclick="log_out()">Log out</button>
+    <script>
+        function log_out(){
+            document.QuerySclecteor('dialog').showModal()
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering HTML | The Deep Dive</title>
+    <style>
+        :root {
+            /* Your custom color implemented as the primary variable */
+            --primary: #ee6d16; 
+            --dark: #5a5b5f;
+            --light: #fdfcfb;
+            --blue: #004878;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            display: grid;
+            grid-template-areas: "header header" "nav main" "footer footer";
+            grid-template-columns: 280px 1fr;
+            background-color: var(--light);
+        }
+        header {
+            grid-area: header;
+            /* Gradient now uses your custom orange */
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+        }
+        nav {
+            grid-area: nav;
+            background: #fff;
+            padding: 30px 20px;
+            border-right: 2px solid #eee;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        main {
+            grid-area: main;
+            padding: 60px 40px;
+        }
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-left: 8px solid var(--primary);
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border-top: 4px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .card:hover { 
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(238, 109, 22, 0.2); 
+        }
+        .tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        details {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid #f1f1f1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        footer {
+            grid-area: footer;
+            background: var(--dark);
+            color: #999;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        /* Tables updated with your color */
+        table {
+            width:100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        th {
+            background: var(--primary); 
+            color: white;
+            padding: 18px;
+            text-align: left;
+        }
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        @media (max-width: 768px) {
+            body { grid-template-columns: 1fr; grid-template-areas: "header" "nav" "main" "footer"; }
+            nav { height: auto; position: relative; border-right: none; border-bottom: 2px solid #eee; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <svg width="50" height="50" viewBox="0 0 24 24" fill="white" style="margin-bottom: 15px;">
+        <path d="M12 2L1 21h22L12 2zm0 3.45l8.27 14.55H3.73L12 5.45z"/>
+    </svg>
+    <h1 style="margin: 0; font-size: 2.5rem;">HTML Architecture Pro</h1>
+    <p style="opacity: 0.9; font-weight: 300;">Advanced Layouts & Semantic Logic</p>
+</header>
+
+<nav>
+    <h3 style="margin-top:0; color: var(--primary);">Modules</h3>
+    <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 15px;"><a href="./modules/Core-Structure.html" style="text-decoration: none; color: var(--dark); font-weight: 500;">&rsaquo; Core Structure</a></li>
+        <li style="margin-bottom: 15px;"><a href="./modules/Advanced-Semantics.html" style="text-decoration: none; color: var(--dark); font-weight: 500;">&rsaquo; Advanced Semantics</a></li>
+        <li style="margin-bottom: 15px;"><a href="./modules/Form-Validation.html" style="text-decoration: none; color: var(--dark); font-weight: 500;">&rsaquo; Form Validation</a></li>
+        <li style="margin-bottom: 15px;"><a href="./modules/Canvas-&-SVG.html" style="text-decoration: none; color: var(--dark); font-weight: 500;">&rsaquo; Canvas & SVG</a></li>
+        <li style="margin-bottom: 15px;"><a href="./modules/Learn-More.html" style="text-decoration: none; color: var(--dark); font-weight: 500;">&rsaquo; Learn More</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section>
+        <h2 style="color: var(--dark); font-size: 2rem;">Structural Engineering</h2>
+        <p>In high-level development, we utilize the <strong>#ee6d16</strong> accent to highlight interactive elements and critical calls to action.</p>
+        
+        <div class="card-grid">
+            <div class="card">
+                <span class="tag">Technical</span>
+                <h4>Web Components</h4>
+                <p>Encapsulating HTML functionality into reusable, custom elements.</p>
+            </div>
+            <div class="card">
+                <span class="tag">Optimization</span>
+                <h4>Resource Hints</h4>
+                <p>Implementing pre-fetch and pre-load strategies for lightning fast assets.</p>
+            </div>
+            <div class="card">
+                <span class="tag">UX Logic</span>
+                <h4>Shadow DOM</h4>
+                <p>Protecting your element styles from document-level leakage.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin-top: 60px;">
+        <h2 style="color: var(--dark);">Semantic Hierarchy</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Protocol</th>
+                    <th>Implementation</th>
+                    <th>Accessibility Impact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>ARIA-Labels</code></td>
+                    <td>Screen-reader attributes</td>
+                    <td style="color: var(--primary); font-weight: bold;">Critical</td>
+                </tr>
+                <tr>
+                    <td><code>Sectioning</code></td>
+                    <td>Main, Nav, Section, Footer</td>
+                    <td style="color: var(--primary); font-weight: bold;">High</td>
+                </tr>
+                <tr>
+                    <td><code>Microdata</code></td>
+                    <td>Schema.org integration</td>
+                    <td style="color: var(--primary); font-weight: bold;">Medium</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section style="margin-top: 60px;">
+        <h2 style="color: var(--dark);">Advanced Syntax Example</h2>
+        <div class="code-block">
+            <span style="color: #c678dd;">&lt;template</span> <span style="color: #d19a66;">id=</span><span style="color: #98c379;">"user-row"</span><span style="color: #c678dd;">&gt;</span><br>
+            &nbsp;&nbsp;<span style="color: #c678dd;">&lt;div</span> <span style="color: #d19a66;">class=</span><span style="color: #98c379;">"user-profile"</span><span style="color: #c678dd;">&gt;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #c678dd;">&lt;slot</span> <span style="color: #d19a66;">name=</span><span style="color: #98c379;">"username"</span><span style="color: #c678dd;">&gt;&lt;/slot&gt;</span><br>
+            &nbsp;&nbsp;<span style="color: #c678dd;">&lt;/div&gt;</span><br>
+            <span style="color: #c678dd;">&lt;/template&gt;</span>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left;">
+        <div>
+            <h4 style="color: white;">Documentation</h4>
+            <p>Complete guides for advanced developers looking to master the DOM structure.</p>
+        </div>
+        <div>
+            <h4 style="color: white;">Quick Links</h4>
+            <p>Terms of Service<br>Privacy Policy<br>Sitemap</p>
+        </div>
+        <div>
+            <h4 style="color: white;">Update Log</h4>
+            <p>Current Version: 4.2.0<br>Stability: Stable</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

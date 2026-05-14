@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "AayushVSH-AayushS",
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.fontSize": 20,
+		"files.exclude": { "**/node_modules": true }
+	}
+}

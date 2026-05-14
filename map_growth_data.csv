@@ -1,7 +1,7 @@
-Grade,Timeline,Season,Subject,Score,Goal,Type
-3,G3 Fall,Fall,Math,202.0,,Actual
-3,G3 Winter,Winter,Math,234.0,218.0,Actual
-3,G3 Spring,Spring,Math,266.0,242.0,Projected
-3,G3 Fall,Fall,Reading,197.0,,Actual
-3,G3 Winter,Winter,Reading,206.0,205.0,Actual
-3,G3 Spring,Spring,Reading,215.0,210.0,Projected
+Grade,Timeline,Subject,Score,Goal
+3,G3 Fall,Math,202.0,0.0
+3,G3 Winter,Math,234.0,218.0
+3,G3 Spring,Math,244.0,242.0
+3,G3 Fall,Reading,197.0,0.0
+3,G3 Winter,Reading,206.0,205.0
+3,G3 Spring,Reading,201.0,210.0

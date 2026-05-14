@@ -1,0 +1,19 @@
+Ladder49/
+├── index.html              <-- Main homepage
+├── about.html              <-- Secondary page
+├── assets/                 <-- All static media
+│   ├── images/             <-- Photos and backgrounds
+│   │   ├── hero.jpg
+│   │   └── logo.png
+│   ├── icons/              <-- SVGs and favicons
+│   │   ├── favicon.ico
+│   │   └── icon.svg
+│   └── fonts/              <-- Custom typography
+├── css/                    <-- Stylesheets
+│   ├── style.css           <-- Main layout rules
+│   └── components.css      <-- Styles for nav/buttons
+├── js/                     <-- Interactivity
+│   └── main.js             <-- Global scripts
+└── components/             <-- Reusable HTML snippets
+    ├── header.html
+    └── footer.html

@@ -1,0 +1,25 @@
+{
+    "folders":[
+        {
+            "name": "Aayush",
+            "path": "../Ladder49/public/web/index.html"
+        }
+    ],
+    "settings": {
+        "editor.fontsize": 20,
+        "files.exclude": { "**/node_modules": true }
+    },
+    "mcp": {
+        "inputs": [],
+        "servers": {
+            "mcp-server-time": {
+                "command": "uvx",
+                "args": [
+                    "mcp_server_time",
+                    "--local-timezone=America/Los_Angeles"
+                ]
+            }
+        }
+    }
+    
+}
