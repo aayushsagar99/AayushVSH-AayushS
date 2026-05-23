@@ -1,3 +1,4 @@
+fetch(`../data/contact.yaml`)
 function cover_sheet() {
     window.location.href = "../about.html";
 }

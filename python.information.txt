@@ -1,0 +1,16 @@
+1. Storing Multiple Items
+Groups data collections together.
+Assigns data to one variable.
+Uses square brackets [].
+2. Ordered, Changeable, and Duplicates
+Ordered: Items maintain their sequence.
+Changeable: Items can be modified.
+Duplicates: Identical values are allowed.
+3. Accessing Items by Index
+Uses zero-based indexing.
+First item is index 0.
+Syntax uses square brackets.
+4. Allowing Mixed Data Types
+Holds integers and floats.
+Holds strings and booleans.
+Mixes different types together.

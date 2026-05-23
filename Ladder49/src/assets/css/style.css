@@ -9,13 +9,18 @@ body{
 .background{
     background: linear-gradient( var(--discover-orange), var(--capital1-red));
     position:absolute;
-    height: 80%;
-    width:99.1%;
+    height: 100%;
+    width:100%;
+    left:50%;
+    top:50%;
+     transform: translate(-50%, -50%);
 }
 nav {
-  background-color: #201d1c;
+  background-color: var(--discover-orange);
   overflow: hidden;
   width:100%;
+  position:absolute;
+  top:50%;
 }
 
 nav a {
@@ -28,7 +33,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #e0e0e0;
+  background-color: var(--capital1-red);
   color: black;
 }
 
@@ -37,7 +42,7 @@ nav a:hover {
     font-size: xxx-large;
     color: white;
     margin: 0;
-    text-shadow: 15px 15px 0px #be3f1e;
+    text-shadow: 15px 15px 0px #bc3f13;
     position: absolute;
     left: 25%;
     top: 27.5%;
@@ -60,11 +65,10 @@ nav a:hover {
     font-size: x-large;
     text-align: center;
     width: 500px;
+    text-shadow: 5px 5px 0px #bc3f13;
 }
 
-.title-container {
-    font-family: var(--font);
-}
+.title-container {font-family: var(--font);}
 
 .cover-sheet{
     position: absolute;
@@ -95,18 +99,20 @@ nav a:hover {
 }
 
 .description_container{
+    text-align: center;
     font-size: larger;
     font-family: var(--font);
     color: white;
     position: absolute;
-    top: 70%;
+    top: 50%;
     left: 50%;
     width: 75%;
     transform: translate(-50%, 50%);
 }
 /* .abbr{} remove underlined text */
 
-.cover-sheet:hover,.ciriculum-vitae:hover{background-color:#516dfe;}
+.cover-sheet:hover,.ciriculum-vitae:hover{background-color:#516dfe; border-color:#516dfe}
+.cover-sheet:hover{color:white}
 
 footer {
   background-color: #333;
@@ -120,3 +126,53 @@ footer a {
   color: #add8e6;
   text-decoration: none;
 }
+
+a{color:#1400ed;}
+
+.aws-cloud-practitioner,.sdp-safe-agile-5{
+    position:absolute;
+    top:110%;
+    width:7.5%;
+    height:15%;
+}
+
+.cloudbees-jenkins-engineer{
+    position:absolute;
+    top:130%;
+    width:8%;
+    height:15%;
+}
+
+.cognizant-ai-for-leaders{
+    position:absolute;
+    top:150%;
+    width:8%;
+    height:15%;
+}
+
+.cognizant-cspm-mc1{
+    position:absolute;
+    top:170%;
+    width:8%;
+    height:15%;
+}
+.dataops{
+    position:absolute;
+    top:190%;
+    width:8%;
+    height:15%;
+}
+
+.gremlin-cahos-engineering{
+    position:absolute;
+    top:207.5%;
+    width:8%;
+    height:15%;
+}
+.r2s{left:90%}
+.aws-cloud-practitioner,.sdp-safe-agile-5:hover{top:109%}
+.cloudbees-jenkins-engineer:hover{top:129%}
+.cognizant-ai-for-leaders:hover{top:149%;}
+.cognizant-cspm-mc1:hover{top:169%;}
+.dataops:hover{top:189%}
+.gremlin-cahos-engineering:hover{top:206.5%}
