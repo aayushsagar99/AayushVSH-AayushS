@@ -56,7 +56,7 @@ while main!=3:
             exit()
     elif main==2:
         print("complex")
-        j=int(input("Enter 1 for square root, enter 2 for cube root, enter 3 for circumfirence of a circle, enter 4 for powers, enter 5 for factorial or enter 6 to exit:"))
+        j=int(input("Enter 1 for square root, enter 2 for cube root, enter 3 for circumfirence of a circle, enter 4 for powers, enter 5 for factorial, enter 6 for sin, enter 7 for cos, enter 8 for tan, enter 9 for hyp, enter 10 to create, or enter 11 to exit:"))
         if j==1:
             print("square root")
             time.sleep(1)
@@ -100,11 +100,82 @@ while main!=3:
             print(f"{fa} factorial is {math.factorial(fa)}")
             time.sleep(1)
         elif j==6:
+            print("sin")
+            time.sleep(1)
+            sin=float(input("What is the sin number:"))
+            print("Thinking...")
+            time.sleep(2.5)
+            print(f"The sin of {sin} is {math.sin(sin)}")
+            time.sleep(1)
+        elif j==7:
+            print("cos")
+            time.sleep(1)
+            cos=float(input("What is the cos number:"))
+            print("Thinking...")
+            time.sleep(2.5)
+            print(f"The cos of {cos} is {math.cos(cos)}")
+        elif j==8:
+            print("tan")
+            time.sleep(1)
+            tan=float(input("What is the tan number:"))
+            print("Thinking...")
+            time.sleep(2.5)
+            print(f"The tan of {tan} is {math.tan(tan)}")
+            time.sleep(1)
+        elif j==9:
+            print("hypotenuse")
+            time.sleep(1)
+            hyp=float(input("What is the first hypotenuse number:"))
+            hyp2=float(input("What is the second hypotenuse number:"))
+            print("Thinking...")
+            time.sleep(2.5)
+            print(f"The hypotenuse of {hyp} and {hyp2} is {math.hypot(hyp, hyp2)}")
+            time.sleep(1)
+        elif j==10:
+            print("create")
+            time.sleep(1)
+            import sympy as sp
+            def process_complex_equation():
+                print("--- Equation Processor ---")
+                print("Rules: Use parentheses for functions: sin(x), cos(x), log(x), sqrt(x)")
+                print("Example inputs: sin(x) = 0.5  OR  cos(x)**2 + log(x)")
+                print("-----------------------------------")
+                
+                user_input = input("Enter expression or equation: ")
+                x = sp.Symbol('x')
+                
+                try:
+                    # Check if the user entered an equation with an '=' sign
+                    if "=" in user_input:
+                        left_side, right_side = user_input.split("=")
+                        # Parse both sides and build a SymPy Equation object
+                        equation = sp.Eq(sp.sympify(left_side.strip()), sp.sympify(right_side.strip()))
+                        print(f"\nParsed Equation: {equation}")
+                        
+                        # Solve the equation for x
+                        solutions = sp.solve(equation, x)
+                        print(f"Solutions for x: {solutions}")
+                        
+                    else:
+                        # Handle plain expressions (no equals sign)
+                        expression = sp.sympify(user_input)
+                        print(f"\nParsed Expression: f(x) = {expression}")
+                        print(f"Derivative: {sp.diff(expression, x)}")
+                        print(f"Integral: {sp.integrate(expression, x)}")
+
+                except Exception as e:
+                    print(f"\nSyntax Error: Make sure to use explicit syntax like 'sin(x)' instead of 'sin x'.")
+                    print(f"Details: {e}")
+
+            if __name__ == "__main__":
+                process_complex_equation()
+
+        elif j==11:
             print("bye!")
             time.sleep(1)
-            exit()
-        elif (j>6):
-            print("Enter only 1, 2, 3, 4, or 5!")
+            break
+        elif (j>11):
+            print("Enter only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, or 11!")
             chances=chances-1
             if chances==1:
                 print(chances," chance left!")

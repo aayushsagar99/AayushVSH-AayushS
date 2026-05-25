@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH.py</title>
+    <style>
+        /* Container holds code and button together */
+        .code-container {
+            position: relative;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            max-width: 800px;
+        }
+        /* Style the code block */
+        pre {
+            margin: 0;
+            white-space: pre-wrap; 
+            font-family: monospace;
+        }
+        /* Style the copy button */
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>MATH.py</h1>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode()"><img src="./img/copy.png" alt=""></button>
+        <pre><code id="pythonCode">
+            <p>import math</p>
+            <p>import time</p>
+            <p>print("WELCOME!!! Pick whatever math problem to solve!")</p>
+            <p>main=int(input("Enter 1 for simple, enter 2 for complex or enter 3 to exit: "))</p>
+            <p>if main==3:</p>
+            <p>    print("bye!")</p>
+            <p>    time.sleep(1)</p>
+            <p>    exit()</p>
+            <p>chances=3</p>
+            <p>if (main>3):</p>
+            <p>    print("Enter only 1, 2, or 3!")</p>
+            <p>    chances=chances-1</p>
+            <p>    if chances==1:</p>
+            <p>        print(chances," chance left!")</p>
+            <p>    else:</p>
+            <p>        print(chances," chances left!")</p>
+            <p>while main!=3:</p>
+            <p>    if main==1:</p>
+            <p>        print("simple")</p>
+            <p>        h=int(input("Enter 1 for addition, enter 2 for subtraction, enter 3 for multiplication, enter 4 for division, or enter 5 to exit:"))</p>
+            <p>        if h==1:</p>
+            <p>            print("addition")</p>
+            <p>            time.sleep(1)</p>
+            <p>            ad=float(input("What is the first number to add: "))</p>
+            <p>            ad2=float(input("What is the second number to add: "))</p>
+            <p>            print("Thinking...")</p>
+            <p>            time.sleep(2.5)</p>
+            <p>            print(f"{ad}+{ad2}={ad+ad2}")</p>
+            <p>        elif h==2:</p>
+            <p>            print("subtraction")</p>
+            <p>            time.sleep(1)</p>
+            <p>            su=float(input("What is the first number to subtract: "))</p>
+            <p>            su2=float(input("What is the second number to subtract: "))</p>
+            <p>            print("Thinking...")</p>
+            <p>            time.sleep(2.5)</p>
+            <p>            print(f"{su}-{su2}={su-su2}")</p>
+            <p>        elif h==3:</p>
+            <p>            print("multiplication")</p>
+            <p>            time.sleep(1)</p>
+            <p>            mu=float(input("What is the first number to multiply: "))</p>
+            <p>            mu2=float(input("What is the second number to multiply: "))</p>
+            <p>            print("Thinking...")</p>
+            <p>            time.sleep(2.5)</p>
+            <p>            print(f"{mu}*{mu2}={mu*mu2}")</p>
+            <p>        elif h==4:</p>
+            <p>            print("division")</p>
+            <p>            time.sleep(1)</p>
+            <p>            di=float(input("What is the first number to divide: "))</p>
+            <p>            di2=float(input("What is the second number to divide: "))</p>
+            <p>            if di2 == 0:</p>
+            <p>                print("Error! Cannot divide by zero.")</p>
+            <p>            else:</p>
+            <p>                print("Thinking...")</p>
+            <p>                time.sleep(2.5)</p>
+            <p>                print(f"{di}/{di2}={di/di2}")</p>
+            <p>        elif h==5:</p>
+            <p>            print("Exiting simple menu...")</p>
+            <p>            main=int(input("Enter 1 for simple, enter 2 for complex or enter 3 to exit: "))</p>
+            <p>    elif main==2:</p>
+            <p>        print("complex math placeholder")</p>
+            <p>        main=int(input("Enter 1 for simple, enter 2 for complex or enter 3 to exit: "))</p>
+        </code></pre>
+    </div>
+    <script>
+        function copyCode() {
+            // Get the text inside the code element
+            const codeText = document.getElementById("pythonCode").innerText;
+            
+            // Use Clipboard API to copy text
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.innerText = 'Copied!';
+                
+                // Reset button text after 2 seconds
+                setTimeout(() => {
+                    btn.innerText = 'Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

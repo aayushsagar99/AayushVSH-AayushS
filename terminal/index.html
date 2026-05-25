@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run External Python File</title>
+    
+    <!-- Load PyScript core architecture -->
+    <link rel="stylesheet" href="https://pyscript.net">
+    <script type="module" src="https://pyscript.net"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            padding: 40px;
+            margin: 0;
+        }
+        .app-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h1 { color: #2c3e50; font-size: 24px; margin-top: 0; }
+        p { color: #7f8c8d; }
+        #output-panel {
+            background-color: #2d3748;
+            color: #a0aec0;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            margin-top: 20px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        .highlight { color: #48bb78; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="app-card">
+    <h1>Web Browser Python Execution</h1>
+    <p>The output below is fetched and computed entirely from your local <span class="highlight">math.py</span> script inside the browser window.</p>
+    
+    <!-- PyScript will capture the python stdout stream and inject it here -->
+    <div id="output-panel">Initializing Python core runtime...</div>
+</div>
+
+<!-- 
+    The config property fetches "math.py" from the server and makes it visible 
+    to the Python environment. The target property points stdout to our div.
+-->
+<script type="py" config='{"files": {"./math.py": "./math.py"}}' target="output-panel">
+# Import the file from the local virtual file structure
+import math
+
+# Running the import automatically executes the print statements inside math.py.
+# You can also explicitly trigger functions right here if needed:
+extra_calculation = math.multiply_numbers(10, 10)
+print(f"Extra calculation executed from HTML: 10 * 10 = {extra_calculation}")
+</script>
+
+</body>
+</html>
