@@ -6,3 +6,5 @@ function cover_sheet() {
 function curriculum_vitae(){
     window.location.href = "../resume.html";
 }
+
+

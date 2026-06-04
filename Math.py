@@ -56,7 +56,7 @@ while main!=3:
             exit()
     elif main==2:
         print("complex")
-        j=int(input("Enter 1 for square root, enter 2 for cube root, enter 3 for circumfirence of a circle, enter 4 for powers, enter 5 for factorial, enter 6 for sin, enter 7 for cos, enter 8 for tan, enter 9 for hyp, enter 10 to create, or enter 11 to exit:"))
+        j=int(input("Enter 1 for square root, enter 2 for cube root, enter 3 for circumfirence of a circle, enter 4 for powers, enter 5 for factorial, enter 6 for sin, enter 7 for cos, enter 8 for tan, enter 9 for hyp, enter 10 for log, enter 11 to create, or enter 12 to exit:"))
         if j==1:
             print("square root")
             time.sleep(1)
@@ -132,14 +132,20 @@ while main!=3:
             print(f"The hypotenuse of {hyp} and {hyp2} is {math.hypot(hyp, hyp2)}")
             time.sleep(1)
         elif j==10:
-            print("create")
+            print("log")
             time.sleep(1)
+            log=float(input("What is the log number:"))
+            print("Thinking...")
+            time.sleep(2.5)
+            print(f"The log of {log} is {math.log(log)}")
+        elif j==11:
             import sympy as sp
             def process_complex_equation():
                 print("--- Equation Processor ---")
+                time.sleep(1)
                 print("Rules: Use parentheses for functions: sin(x), cos(x), log(x), sqrt(x)")
                 print("Example inputs: sin(x) = 0.5  OR  cos(x)**2 + log(x)")
-                print("-----------------------------------")
+                print("-"*85)
                 
                 user_input = input("Enter expression or equation: ")
                 x = sp.Symbol('x')
@@ -167,14 +173,13 @@ while main!=3:
                     print(f"\nSyntax Error: Make sure to use explicit syntax like 'sin(x)' instead of 'sin x'.")
                     print(f"Details: {e}")
 
-            if __name__ == "__main__":
-                process_complex_equation()
+            if __name__ == "__main__": process_complex_equation()
 
-        elif j==11:
+        elif j==12:
             print("bye!")
             time.sleep(1)
             break
-        elif (j>11):
+        elif (j>12):
             print("Enter only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, or 11!")
             chances=chances-1
             if chances==1:

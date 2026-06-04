@@ -27,7 +27,7 @@ else:
         print("The sum of natural numbers are:", +sum)
 
 print("Project 4: identify vowels")
-s = input("Enter a string")
+s = input(str("Enter a string"))
 vowels = "aeiouAEIOU"
 count =0
 for char in s:
