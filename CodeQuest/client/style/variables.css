@@ -1,0 +1,10 @@
+:root {
+    --brand-orange: #ff6024;
+    --text-white: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.9);
+    --border-radius-round: 50px;
+    --font-sans: "itc-cheltenham", "Cheltenham", Georgia, serif;
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+

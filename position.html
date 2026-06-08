@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed); 
+        }
+
+
+        input {
+            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {border-color: #007bff;}
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <input id="x" type="text" placeholder="Enter X baseline">
+    <input id="y" type="text" placeholder="Enter Y baseline">
+    <button onclick="checkPosition(10, 10)">Check Position</button>
+
+    <script>
+        function checkPosition(x, y) {
+            var xPos = Number(document.getElementById("x").value);
+            var yPos = Number(document.getElementById("y").value);
+
+            if ((x < xPos) && (y < yPos)) {
+                alert("Adjust the position!");
+            } else {
+                alert("Things are fine.");
+            }
+        }
+    </script>
+    
+</body>
+</html>

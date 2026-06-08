@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-sans);
+}
+body {
+    background-color: var(--brand-orange);
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 60px;
+}
+.logo { font-size: 24px; font-weight: bold; }
+.nav-links { display: flex; align-items: center; gap: 25px; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
+.btn-book {
+    background-color: var(--text-white);
+    color: var(--brand-orange) !important;
+    padding: 12px 30px;
+    border-radius: var(--border-radius-round);
+}
+.hero { display: flex; flex: 1; align-items: center; padding: 0 60px 60px; gap: 40px; }
+.hero-left { flex: 1; max-width: 550px; }
+.hero-title { font-size: 64px; margin-bottom: 30px; }
+.hero-text { font-size: 20px; margin-bottom: 45px; color: var(--text-muted); }
+.btn-explore {
+    display: inline-block;
+    background-color: var(--text-white);
+    color: var(--brand-orange);
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: var(--border-radius-round);
+}
+.hero-right { flex: 1; display: flex; justify-content: flex-end; }
+.hero-image { width: 100%; max-width: 700px; height: 550px; object-fit: cover; border-radius: 4px; }
+footer { padding: 20px 60px; text-align: center; font-size: 14px; opacity: 0.7; }
+/* Core Layout */
+.hero {
+  display: flex; 
+  flex: 1; 
+  align-items: center; 
+  padding: 60px; /* Adjusted to balance top/bottom/sides */
+  gap: 40px;
+}
+
+.hero-left { 
+  flex: 1; 
+  max-width: 550px; 
+}
+
+.hero-right { 
+  flex: 1; 
+  display: flex; 
+  justify-content: flex-end; 
+}
+
+/* Image styling matching the screenshot */
+.hero-image { 
+  width: 100%; 
+  max-width: 700px; 
+  height: 550px; 
+  object-fit: cover; 
+  border-radius: 4px; 
+}
+
+/* Typography & Button styling */
+#welcome-title {
+  font-size: 64px;
+  line-height: 1.1;
+  margin-bottom: 30px !important; /* Creates the big gap under the main title */
+}
+
+#welcome-desc {
+  font-size:larger;
+  margin-bottom: 45px !important; /* Creates the big gap before the button */
+  width: 60%;
+}
+
+.btn-explore { 
+  display: inline-block; 
+  background-color: var(--text-white, #ffffff); 
+  color: var(--brand-orange, #e05a2b); 
+  text-decoration: none; 
+  padding: 16px 40px; 
+  border-radius: 50px; /* Creates the rounded capsule shape */
+  font-weight: 500;
+}

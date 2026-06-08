@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speed limit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      /* Modern mesh gradient background */
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    label {
+      font-size: 14px;
+      color: #4a4a4a;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    input {
+      padding: 10px;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus {
+      border-color: #764ba2;
+    }
+    button {
+      /* Matching gradient for the button */
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <label>Your Speed (MPH): 
+      <input id="mph" type="text">
+    </label>
+    
+    <label>Speed Limit: 
+      <input id="lim" type="text">
+    </label>
+    
+    <button type="button" onclick="checkSpeed()">Submit</button>
+  </div>
+
+  <script>
+    function checkSpeed() {
+      const mph = Number(document.getElementById("mph").value);
+      const speedlimit = Number(document.getElementById("lim").value);
+      const what = "What's wrong with you?";
+      
+      if ((mph === Math.round(mph)&&Math.floor(mph)&&Math.ceil(mph))|| mph === speedlimit){
+        alert("You are driving safely.");
+      } else if (mph > speedlimit) {
+        alert("You are speeding. " + what);
+      } else {
+        alert("You are slowing down. " + what);
+      }
+    }
+  </script>
+</body>
+</html>
