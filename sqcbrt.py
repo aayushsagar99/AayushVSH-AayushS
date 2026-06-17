@@ -1,7 +1,7 @@
 import math
 import time
 def sce():
-    i=int(input("Which one do tyou want to solve? enter 1 for square root or enter 2 for cube root:"))
+    i=int(input("Which one do you want to solve? enter 1 for square root or enter 2 for cube root:"))
     if i==1:
         sq=float(input("Which number should be square rooted:"))
         print("Thinking...")

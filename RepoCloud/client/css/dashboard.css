@@ -1,0 +1,239 @@
+/* --- Base Dashboard Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.dashboard-body {
+    display: flex;
+    flex-direction: column; /* This forces the navbar to the top */
+    height: 100vh;
+    background-color: #f8fafc; 
+    color: #1e293b;
+    overflow: hidden; 
+}
+
+/* New wrapper to hold the sidebar and workspace side-by-side */
+.dashboard-layout {
+    display: flex;
+    flex-grow: 1; /* Tells this section to fill the remaining screen height below the navbar */
+    overflow: hidden;
+}
+
+/* (The rest of your sidebar and workspace CSS stays exactly the same!) */
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 280px;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    z-index: 10;
+}
+
+.sidebar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #0f172a;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #64748b;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+.nav-item.active {
+    background-color: #eff6ff; /* Light blue highlight */
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.5rem;
+    margin-top: auto;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-profile .avatar {
+    background-color: #f1f5f9;
+    padding: 0.5rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* --- Main Workspace Area --- */
+.workspace {
+    flex-grow: 1;
+    overflow-y: auto; /* Allows only the main area to scroll */
+    padding: 2.5rem 3rem;
+}
+
+.workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+/* --- Data Grid & Cards --- */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.repo-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.repo-card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+}
+
+.repo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.repo-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.source-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.repo-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+    word-break: break-all;
+}
+
+.repo-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* --- Status Badges --- */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.status-connected {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-syncing {
+    background-color: #fef3c7;
+    color: #92400e;
+    animation: pulse 2s infinite;
+}
+
+.status-paused {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}

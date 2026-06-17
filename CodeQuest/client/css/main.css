@@ -5,12 +5,13 @@
     font-family: var(--font-sans);
 }
 body {
-    background-color: var(--brand-orange);
+    background-color:white;
     color: var(--text-white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+.background{background-color: var(--brand-orange); width: 100%; height: 100vh; position: fixed;}
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -41,27 +42,22 @@ body {
 .hero-right { flex: 1; display: flex; justify-content: flex-end; }
 .hero-image { width: 100%; max-width: 700px; height: 550px; object-fit: cover; border-radius: 4px; }
 footer { padding: 20px 60px; text-align: center; font-size: 14px; opacity: 0.7; }
-/* Core Layout */
 .hero {
   display: flex; 
   flex: 1; 
   align-items: center; 
-  padding: 60px; /* Adjusted to balance top/bottom/sides */
+  padding: 60px; 
   gap: 40px;
 }
-
 .hero-left { 
   flex: 1; 
   max-width: 550px; 
 }
-
 .hero-right { 
   flex: 1; 
   display: flex; 
   justify-content: flex-end; 
 }
-
-/* Image styling matching the screenshot */
 .hero-image { 
   width: 100%; 
   max-width: 700px; 
@@ -69,26 +65,22 @@ footer { padding: 20px 60px; text-align: center; font-size: 14px; opacity: 0.7; 
   object-fit: cover; 
   border-radius: 4px; 
 }
-
-/* Typography & Button styling */
 #welcome-title {
   font-size: 64px;
   line-height: 1.1;
-  margin-bottom: 30px !important; /* Creates the big gap under the main title */
+  margin-bottom: 30px !important; 
 }
-
 #welcome-desc {
   font-size:larger;
-  margin-bottom: 45px !important; /* Creates the big gap before the button */
+  margin-bottom: 45px !important;
   width: 60%;
 }
-
 .btn-explore { 
   display: inline-block; 
   background-color: var(--text-white, #ffffff); 
   color: var(--brand-orange, #e05a2b); 
   text-decoration: none; 
   padding: 16px 40px; 
-  border-radius: 50px; /* Creates the rounded capsule shape */
+  border-radius: 50px; 
   font-weight: 500;
 }
