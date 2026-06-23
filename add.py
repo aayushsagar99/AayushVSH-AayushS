@@ -5,3 +5,8 @@ def my_function (*numbers):
         total += num
     return total
 print(my_function(int(input(f"Enter as many number as you want to {list[0]}:"))))
+
+
+
+
+

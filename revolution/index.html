@@ -47,48 +47,53 @@
                 height: 30em;
                 animation: orbit 36.5s
                 Linear infinite;
-}
+            }
             .moon {
-top: 0;
-right: 0;
-width: 8em;
-height: 8em;
-animation: orbit 2.7s
-Linear infinite;
-}
-.earth::before,
-.moon::before {
-content: '';
-position: absolute;
-border-radius: 50%;
-}
-.earth::before {
-top: 2.8em;
-right: 2.8em;
-width: 3em;
-height: 3em;
-background-color: aqua;
-}
-.moon::before {
-top: 0.8em;
-right: 0.2em;
-width: 1.2em;
-height: 1.2em;
-background-color:
-silver;
-}
-@keyframes orbit {
-    to {
-        transform: rotate(360deg);
-    }
-}
+                top: 0;
+                right: 0;
+                width: 8em;
+                height: 8em;
+                animation: orbit 2.7s
+                Linear infinite;
+            }
+            .earth::before,.moon::before {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+            }
+            .earth::before {
+                top: 2.8em;
+                right: 2.8em;
+                width: 3em;
+                height: 3em;
+                background-color: aqua;
+            }
+                .moon::before {
+                top: 0.8em;
+                right: 0.2em;
+                width: 1.2em;
+                height: 1.2em;
+                background-color:
+                silver;
+            }
+            @keyframes orbit {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
         </style>
     </head>
 <body>
+    <!-- This is the solar system -->
     <div class="container">
-        <div class="sun"></div>
+        <!-- This is the sun -->
+        <div class="sun">
+        <!-- This is the Earth -->
         <div class="earth">
+            <!-- Inside the earth is the moon 
+            This is the moon -->
             <div class="moon"></div>
+        </div>
         </div>
     </div>
 </body>
