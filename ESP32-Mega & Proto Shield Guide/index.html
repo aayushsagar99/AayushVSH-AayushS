@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32-Mega & Proto Shield Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 250px;
+            }
+        }
+        .step-active {
+            border-left-width: 4px;
+            border-color: #4f46e5;
+            background-color: #e0e7ff;
+        }
+        .board-pin {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: #334155;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .pin-active {
+            background-color: #fbbf24;
+            color: #78350f;
+            box-shadow: 0 0 10px #fbbf24;
+        }
+        .led-indicator {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #ef4444;
+            opacity: 0.3;
+            margin: 0 auto;
+        }
+        .led-on {
+            opacity: 1;
+            box-shadow: 0 0 15px 5px rgba(239, 68, 68, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+    <!-- Chosen Palette: Slate Neutrals, Indigo Primary, Emerald Success, Rose Danger -->
+    <!-- Application Structure Plan: The application uses a step-by-step linear wizard structure (Phases 1-3) to guide the user safely through physical connection, critical electrical theory, and a practical test circuit. This task-oriented flow prevents users from skipping straight to wiring without understanding the critical 3.3V limitations of the ESP32, ensuring hardware safety and a successful learning path. -->
+    <!-- Visualization & Content Choices: 
+         - Phase 1 (Physical): Goal: Guide physical assembly -> Presentation: Interactive checklist -> Interaction: Checkboxes to reveal next steps -> Justification: Ensures prerequisites are met before powering up.
+         - Phase 2 (Electrical): Goal: Emphasize 3.3V vs 5V danger -> Presentation: Chart.js Bar Chart -> Interaction: Hover tooltips -> Justification: Visually contrasts the safe operating limits of standard Mega vs ESP32.
+         - Phase 3 (Wiring): Goal: Teach basic circuit routing -> Presentation: Interactive HTML/CSS abstract board diagram -> Interaction: Step-by-step "Next" button highlighting pins and updating code -> Justification: Connects abstract instructions to spatial layout without using SVGs. 
+         - Library/Method: Chart.js for voltage comparison, Tailwind/Vanilla JS for logic and DOM manipulation. NO SVG/Mermaid. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-3">ESP32-Mega & Proto Shield Setup</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">An interactive guide to safely combining the power of an ESP32 in the Arduino Mega form factor with a Prototype Expansion Shield.</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 border-b border-slate-200">
+            <button id="nav-btn-1" class="px-6 py-3 font-semibold text-indigo-600 border-b-2 border-indigo-600 hover:bg-indigo-50 transition-colors" onclick="switchTab(1)">1. Physical Connection</button>
+            <button id="nav-btn-2" class="px-6 py-3 font-medium text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" onclick="switchTab(2)">2. Electrical Differences</button>
+            <button id="nav-btn-3" class="px-6 py-3 font-medium text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" onclick="switchTab(3)">3. Wiring Test Circuit</button>
+        </nav>
+
+        <main class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-10 min-h-[500px]">
+            
+            <section id="phase-1" class="block">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Phase 1: The Physical Connection (Stacking)</h2>
+                    <p class="text-slate-600">This section guides you through the safe physical mating of the ESP32-Mega and the Prototype Shield. Completing these steps in order ensures you do not bend pins or cause mechanical stress to the boards. Check off each item as you complete it.</p>
+                </div>
+                
+                <div class="space-y-4 max-w-3xl mx-auto">
+                    <label class="flex items-start p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                        <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600 mt-1 mr-4" onchange="updateProgress()">
+                        <div>
+                            <span class="block font-bold text-lg">Power Down</span>
+                            <span class="block text-slate-600 mt-1">Ensure your ESP32-Mega board is completely unplugged from USB and any external power supplies.</span>
+                        </div>
+                    </label>
+                    <label class="flex items-start p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                        <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600 mt-1 mr-4" onchange="updateProgress()">
+                        <div>
+                            <span class="block font-bold text-lg">Align the Headers</span>
+                            <span class="block text-slate-600 mt-1">Hold the Prototype Shield directly above the ESP32-Mega. Look closely at the long rows of pins on the sides and the cluster of pins at the back.</span>
+                        </div>
+                    </label>
+                    <label class="flex items-start p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                        <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600 mt-1 mr-4" onchange="updateProgress()">
+                        <div>
+                            <span class="block font-bold text-lg">Check for Bent Pins</span>
+                            <span class="block text-slate-600 mt-1">Look at the bottom of the Proto Shield. If any of the male pins are bent, gently straighten them with needle-nose pliers before proceeding.</span>
+                        </div>
+                    </label>
+                    <label class="flex items-start p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                        <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600 mt-1 mr-4" onchange="updateProgress()">
+                        <div>
+                            <span class="block font-bold text-lg">Press to Seat</span>
+                            <span class="block text-slate-600 mt-1">Once perfectly aligned, press down firmly and evenly on all four corners. It should slide directly into the female headers with no gap.</span>
+                        </div>
+                    </label>
+                </div>
+                
+                <div class="mt-8 text-center hidden" id="phase-1-success">
+                    <p class="text-emerald-600 font-bold text-lg mb-4">&#10003; Physical connection complete! You may proceed to the electrical warnings.</p>
+                    <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors" onclick="switchTab(2)">Next: Electrical Differences</button>
+                </div>
+            </section>
+
+            <section id="phase-2" class="hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Phase 2: CRITICAL Electrical Differences</h2>
+                    <p class="text-slate-600">This is the most important section. Because you are using an ESP32 rather than an ATmega2560 chip, the electrical rules change. This dashboard highlights the critical voltage thresholds you must respect to avoid permanent hardware damage.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-rose-50 border border-rose-200 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-rose-700 mb-3">&#9888; 3.3V Logic Danger</h3>
+                        <p class="text-slate-700 mb-4">A standard Arduino Mega uses 5V logic. <strong class="text-rose-600">The ESP32 uses 3.3V logic.</strong></p>
+                        <p class="text-slate-700 mb-4">If you solder a sensor to your Proto Shield that outputs a 5V signal back to the ESP32, <strong>you will permanently damage the ESP32 chip.</strong></p>
+                        <ul class="list-disc pl-5 text-slate-700 space-y-2">
+                            <li>Always power sensors from the <code>3.3V</code> pin, not the <code>5V</code> pin.</li>
+                            <li>If a sensor requires 5V, you MUST use a Logic Level Converter on the signal line.</li>
+                        </ul>
+                    </div>
+
+                    <div class="w-full">
+                        <h4 class="text-center font-bold text-slate-700 mb-2">Maximum Safe Logic Voltage</h4>
+                        <div class="chart-container">
+                            <canvas id="voltageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">The 5V Pin</h3>
+                        <p class="text-slate-600">The <code>5V</code> pin on the Proto Shield will still output 5V (drawn from USB/VIN). This is fine for powering relays or motors directly, but <em>never</em> connect this 5V power directly to the ESP32's digital or analog input pins.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Pin Mapping</h3>
+                        <p class="text-slate-600">Pay close attention to the silkscreen on your board. The physical location of "Pin 13" on a standard Mega might map to a different GPIO number (e.g., GPIO 18) on your ESP32. You must use the ESP32 GPIO numbers in your code.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-right">
+                    <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors" onclick="switchTab(3)">Next: Wiring a Test Circuit</button>
+                </div>
+            </section>
+
+            <section id="phase-3" class="hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Phase 3: Wiring a Test Circuit (LED)</h2>
+                    <p class="text-slate-600">Let's build a simple circuit on the Proto Shield's central area to test your setup. Follow the interactive steps below to place components and route wires logically before writing the code.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="w-full lg:w-1/3 flex flex-col space-y-2" id="steps-container">
+                        <div class="p-4 border border-slate-200 rounded-lg cursor-pointer transition-all step-active" id="step-0" onclick="goToStep(0)">
+                            <h4 class="font-bold">1. Place an LED</h4>
+                            <p class="text-sm text-slate-600 mt-1">Insert an LED into the central prototyping area of the shield.</p>
+                        </div>
+                        <div class="p-4 border border-slate-200 rounded-lg cursor-pointer transition-all opacity-50" id="step-1" onclick="goToStep(1)">
+                            <h4 class="font-bold">2. Ground Connection</h4>
+                            <p class="text-sm text-slate-600 mt-1">Connect the short leg (cathode) of the LED to a 220 ohm resistor, then to a GND rail.</p>
+                        </div>
+                        <div class="p-4 border border-slate-200 rounded-lg cursor-pointer transition-all opacity-50" id="step-2" onclick="goToStep(2)">
+                            <h4 class="font-bold">3. Signal Connection</h4>
+                            <p class="text-sm text-slate-600 mt-1">Connect the long leg (anode) of the LED to a digital pin (e.g., GPIO 13).</p>
+                        </div>
+                        <div class="p-4 border border-slate-200 rounded-lg cursor-pointer transition-all opacity-50" id="step-3" onclick="goToStep(3)">
+                            <h4 class="font-bold">4. The Code</h4>
+                            <p class="text-sm text-slate-600 mt-1">Write a simple Blink sketch targeting your chosen GPIO pin.</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-2/3 bg-slate-100 rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center min-h-[300px] relative">
+                        
+                        <div id="visual-board" class="w-full max-w-md bg-green-800 p-4 rounded-lg shadow-inner relative transition-opacity duration-500">
+                            <div class="flex justify-between text-white text-xs mb-8">
+                                <div><div class="board-pin inline-flex" id="pin-gnd">GND</div></div>
+                                <div><div class="board-pin inline-flex" id="pin-13">13</div></div>
+                            </div>
+                            
+                            <div class="bg-yellow-100 p-4 rounded text-center grid grid-cols-2 gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="text-xs text-slate-500 mb-1">Central Area</div>
+                                    <div class="led-indicator transition-all duration-300" id="visual-led"></div>
+                                </div>
+                                <div class="flex flex-col items-center justify-center opacity-0 transition-opacity duration-300" id="visual-resistor">
+                                    <div class="w-12 h-4 bg-orange-200 border-2 border-orange-400 rounded-sm flex items-center justify-around px-1">
+                                        <div class="w-1 h-full bg-red-600"></div>
+                                        <div class="w-1 h-full bg-red-600"></div>
+                                        <div class="w-1 h-full bg-amber-800"></div>
+                                    </div>
+                                    <div class="text-[10px] mt-1">220&Omega;</div>
+                                </div>
+                            </div>
+
+                            <div id="wire-gnd" class="absolute w-1 h-20 bg-black left-8 top-10 origin-top opacity-0 transition-opacity duration-300"></div>
+                            <div id="wire-sig" class="absolute w-1 h-20 bg-red-500 right-8 top-10 origin-top opacity-0 transition-opacity duration-300"></div>
+                        </div>
+
+                        <div id="visual-code" class="w-full max-w-md bg-slate-900 rounded-lg p-4 text-green-400 font-mono text-sm hidden">
+<pre><code>void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+}</code></pre>
+                            <div class="mt-4 text-center">
+                                <button class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700" onclick="simulateBlink()">Simulate Output</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button class="px-4 py-2 text-slate-600 hover:text-slate-900" id="prev-btn" onclick="nextStep(-1)" disabled>&larr; Previous Step</button>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700" id="next-btn" onclick="nextStep(1)">Next Step &rarr;</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.getElementById('phase-1').classList.add('hidden');
+            document.getElementById('phase-2').classList.add('hidden');
+            document.getElementById('phase-3').classList.add('hidden');
+            
+            document.getElementById('nav-btn-1').className = "px-6 py-3 font-medium text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors";
+            document.getElementById('nav-btn-2').className = "px-6 py-3 font-medium text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors";
+            document.getElementById('nav-btn-3').className = "px-6 py-3 font-medium text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors";
+            
+            document.getElementById('phase-' + tabId).classList.remove('hidden');
+            document.getElementById('nav-btn-' + tabId).className = "px-6 py-3 font-semibold text-indigo-600 border-b-2 border-indigo-600 hover:bg-indigo-50 transition-colors";
+
+            if (tabId === 2 && !window.chartInitialized) {
+                initChart();
+                window.chartInitialized = true;
+            }
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('#phase-1 input[type="checkbox"]');
+            let allChecked = true;
+            checkboxes.forEach(cb => {
+                if (!cb.checked) allChecked = false;
+            });
+            
+            if (allChecked) {
+                document.getElementById('phase-1-success').classList.remove('hidden');
+            } else {
+                document.getElementById('phase-1-success').classList.add('hidden');
+            }
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('voltageChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Standard Arduino Mega', 'ESP32-Mega'],
+                    datasets: [{
+                        label: 'Operating Logic Voltage (V)',
+                        data: [5.0, 3.3],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)', 
+                            'rgba(16, 185, 129, 0.8)' 
+                        ],
+                        borderColor: [
+                            'rgb(220, 38, 38)',
+                            'rgb(5, 150, 105)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 6,
+                            title: {
+                                display: true,
+                                text: 'Voltage (V)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + 'V';
+                                    }
+                                    if (context.parsed.y === 5.0) {
+                                        label += ' (Will damage ESP32!)';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        let currentStep = 0;
+        const totalSteps = 4;
+        let blinkInterval;
+
+        function nextStep(direction) {
+            let newStep = currentStep + direction;
+            if (newStep >= 0 && newStep < totalSteps) {
+                goToStep(newStep);
+            }
+        }
+
+        function goToStep(step) {
+            currentStep = step;
+            
+            for (let i = 0; i < totalSteps; i++) {
+                const el = document.getElementById('step-' + i);
+                if (i === step) {
+                    el.className = "p-4 border border-slate-200 rounded-lg cursor-pointer transition-all step-active";
+                } else if (i < step) {
+                    el.className = "p-4 border border-slate-200 rounded-lg cursor-pointer transition-all bg-slate-50";
+                } else {
+                    el.className = "p-4 border border-slate-200 rounded-lg cursor-pointer transition-all opacity-50 hover:opacity-100";
+                }
+            }
+
+            document.getElementById('prev-btn').disabled = (step === 0);
+            if (step === 0) {
+                document.getElementById('prev-btn').classList.add('opacity-50');
+            } else {
+                document.getElementById('prev-btn').classList.remove('opacity-50');
+            }
+
+            document.getElementById('next-btn').disabled = (step === totalSteps - 1);
+            if (step === totalSteps - 1) {
+                document.getElementById('next-btn').classList.add('opacity-50');
+            } else {
+                document.getElementById('next-btn').classList.remove('opacity-50');
+            }
+
+            updateVisuals(step);
+        }
+
+        function updateVisuals(step) {
+            clearInterval(blinkInterval);
+            document.getElementById('visual-led').classList.remove('led-on');
+
+            const board = document.getElementById('visual-board');
+            const code = document.getElementById('visual-code');
+            const led = document.getElementById('visual-led');
+            const res = document.getElementById('visual-resistor');
+            const wireGnd = document.getElementById('wire-gnd');
+            const wireSig = document.getElementById('wire-sig');
+            const pinGnd = document.getElementById('pin-gnd');
+            const pin13 = document.getElementById('pin-13');
+
+            board.classList.remove('hidden');
+            code.classList.add('hidden');
+
+            if (step === 0) {
+                led.style.opacity = '1';
+                res.style.opacity = '0';
+                wireGnd.style.opacity = '0';
+                wireSig.style.opacity = '0';
+                pinGnd.classList.remove('pin-active');
+                pin13.classList.remove('pin-active');
+            } else if (step === 1) {
+                led.style.opacity = '1';
+                res.style.opacity = '1';
+                wireGnd.style.opacity = '1';
+                wireSig.style.opacity = '0';
+                pinGnd.classList.add('pin-active');
+                pin13.classList.remove('pin-active');
+            } else if (step === 2) {
+                led.style.opacity = '1';
+                res.style.opacity = '1';
+                wireGnd.style.opacity = '1';
+                wireSig.style.opacity = '1';
+                pinGnd.classList.add('pin-active');
+                pin13.classList.add('pin-active');
+            } else if (step === 3) {
+                board.classList.add('hidden');
+                code.classList.remove('hidden');
+            }
+        }
+
+        function simulateBlink() {
+            document.getElementById('visual-code').classList.add('hidden');
+            document.getElementById('visual-board').classList.remove('hidden');
+            
+            const led = document.getElementById('visual-led');
+            let isOn = false;
+            
+            clearInterval(blinkInterval);
+            
+            led.classList.add('led-on');
+            
+            blinkInterval = setInterval(() => {
+                isOn = !isOn;
+                if (isOn) {
+                    led.classList.add('led-on');
+                } else {
+                    led.classList.remove('led-on');
+                }
+            }, 500);
+
+            setTimeout(() => {
+                clearInterval(blinkInterval);
+                led.classList.remove('led-on');
+                document.getElementById('visual-board').classList.add('hidden');
+                document.getElementById('visual-code').classList.remove('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
