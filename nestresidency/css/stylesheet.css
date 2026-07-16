@@ -1,0 +1,322 @@
+/* CSS Document */
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+
+.BodyCenter{
+width:1006px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.Header{
+width:1006px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+}
+
+.HeaderLeft{
+width:329px;
+float:left;
+}
+
+.HeaderRight{
+width:676px;
+height:119px;
+background-image:url(../images/Header2.jpg);
+background-repeat:no-repeat;
+float:left;
+}
+
+.HeaderRight1{
+width:230px;
+float:right;
+margin-top:4px;
+margin-right:0px;
+}
+
+.HeaderFacebook{
+float:left;
+margin:39px 15px 1px 1px;
+}
+
+.HeaderFacebook2{
+float:left;
+}
+
+.HeaderMenu{
+width:676px;
+float:left;
+}
+
+.Banner{
+width:1006px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+text-align:center;
+padding:5px 0px 1px 0px;
+background-color:#352919;
+}
+
+.Middle{
+width:985px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+background-image:url(../images/LeftTextBg.jpg);
+background-repeat:repeat-x;
+padding:1px 11px 1px 11px;
+}
+
+.MiddleLeftSide{
+width:220px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+padding:31px 1px 2px 1px;
+}
+
+.MiddleCenterSide{
+width:408px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+}
+
+.MiddleAboutRightSide{
+width:750px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+vertical-align:top;
+}
+
+.MiddleRightSide{
+width:350px;
+margin-left:auto;
+margin-right:auto;
+float:left;
+padding:9px 1px 0px 1px;
+}
+
+.Font12{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+padding:0px 5px 5px 12px;
+line-height:22.6px;
+text-align:justify;
+}
+
+.Marquee{
+color: #993300;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+padding:15px 5px 15px 12px;}
+
+.Footer{
+background-color:#352919;
+height:55px;
+width:1006px;
+vertical-align:bottom;
+float:left;
+}
+
+.FooterLeft{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#FFFFFF;
+width:250px;
+float:left;
+text-align:left;
+padding:19px 2px 2px 15px;
+}
+
+.FooterRight{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#FFFFFF;
+width:699px;
+float:Right;
+text-align:Right;
+padding:19px 15px 2px 15px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.BottomFont{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#FFFFFF;
+padding:2px 6px 2px 6px;
+text-decoration:none;
+}
+
+.HomeBottomBg{
+background-image:url(../images/BottomBg.jpg);
+background-repeat:no-repeat;
+width:1006px;
+height:281px;
+margin-left:auto;
+margin-right: auto;
+float: right;
+}
+
+.TextBg{
+background-image:url(../images/LeftTextBg.jpg); 
+background-repeat:repeat-x;
+}
+
+.Flash{
+padding:0px 0px 2px 0px;
+background-color:#352919;
+}
+
+.HomeMore{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+color:#000000;
+letter-spacing:.08em;
+text-decoration:none;
+}
+
+.EnquiryBg{
+background-image:url(../images/EnquiryBg.jpg);
+background-repeat:no-repeat;
+width:365px;
+height:279px;
+}
+
+.Font{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+padding:0px 5px 5px 5px;
+line-height:21px;
+}
+
+.Font1{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+padding:5px 33px 5px 5px;
+line-height:22px;
+}
+
+.Enquiry{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+padding:2px 2px 2px 2px;
+line-height:22px;
+}
+.style2 {
+font-family: Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+font-size: 17px;
+font-weight: bold;
+}
+
+.Border{
+border:#776539 5px solid;
+}
+
+.BorderMysore{
+border:#776539 3px solid;
+}
+
+.style3 {
+font-size: 10px;
+font-family: Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+}
+.ReservationFont{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+text-align:left;
+padding:3px 3px 3px 45px;
+}
+
+.ReservationHdFont{
+font-family:Arial, Helvetica, sans-serif;
+font-size:16px;
+font-weight:bold;
+text-align:center;
+color:#7E6530;
+letter-spacing:.04em;
+text-shadow:#FFFFFF 1px 1px 1px;
+background-color:#D7CB95;
+height:33px;
+}
+.ReservationBorder{
+background-color:#EBE9D0;
+border:#8F7136 solid 1px;
+}
+
+.ReservationTextBox{
+width:166px;
+padding:2px 2px 2px 9px;
+}
+.ReservationTextBox1{
+width:166px;
+padding:2px 2px 2px 9px;
+}
+
+.AboutFont{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+padding:0px 5px 5px 5px;
+line-height:26px;
+text-align:justify;
+}
+
+.MysoreFont{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+padding:0px 5px 0px 5px;
+line-height:23px;
+text-align:justify;
+}
+
+.MysoreBoder{
+font-family:Arial, Helvetica, sans-serif;
+padding:2px 5px 8px 5px;
+color:#7E6530;
+font-weight:bold;
+border-bottom:#7E6530 solid 1px;
+height:15px; width:696px; float:left;
+margin:0px 0px 15px 0px;
+}
+
+.MysoreHdFont{
+font-family:Arial, Helvetica, sans-serif;
+padding:8px 5px 8px 5px;
+color:#7E6530;
+font-weight:bold;
+font-size:17px;
+height:15px; width:696px; float:left;
+}
+
+.MysoreTop{
+font-family:Arial, Helvetica, sans-serif;
+padding:8px 5px 8px 5px;
+color:#7E6530;
+font-weight:bold;
+}
+
+

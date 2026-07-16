@@ -1,0 +1,38 @@
+body{
+    background-color:black;
+}
+
+input{
+    width: 75%;
+    height: 12.5vh;
+}
+button{
+    border-radius: 50%;
+    height: 12.5vh;
+    width: 12.5vh;
+    display: grid();
+    font-size: xxx-large;
+    border: none;
+    background-color: hsl(0, 0%, 25%);
+    color: white;
+}
+
+button:hover{
+    background-color: hsl(0, 0%, 35%);
+}
+
+button:active{
+    background-color: hsl(0, 0%, 45%);
+}
+
+.operation{
+    background-color: hsl(25, 100%, 50%);
+}
+
+.operation:hover{
+    background-color: hsl(25, 100%, 60%);
+}
+
+.operation:active{
+    background-color: hsl(25, 100%, 70%);
+}

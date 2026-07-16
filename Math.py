@@ -17,7 +17,8 @@ if (main>3):
 while main!=3:
     if main==1:
         print("simple")
-        h=int(input("Enter 1 for addition, enter 2 for subtraction, enter 3 for multiplication, enter 4 for divition, or enter 5 to exit:"))
+        h=int(input("Enter 1 for addition, enter 2 for subtraction, enter 3 for " \
+        "multiplication, enter 4 for divition, or enter 5 to exit:"))
         if h==1:
             print("addition")
             time.sleep(1)
@@ -49,14 +50,17 @@ while main!=3:
             di2=float(input("What is the second number to divide: "))
             print("Thinking...")
             time.sleep(2.5)
-            print(f"{di}/{di2}={di*di2}")
+            print(f"{di}/{di2}={di/di2}")
         elif h==5:
             print("bye!")
             time.sleep(1)
             exit()
     elif main==2:
         print("complex")
-        j=int(input("Enter 1 for square root, enter 2 for cube root, enter 3 for circumfirence of a circle, enter 4 for powers, enter 5 for factorial, enter 6 for sin, enter 7 for cos, enter 8 for tan, enter 9 for hyp, enter 10 for log, enter 11 to create, or enter 12 to exit:"))
+        j=int(input("Enter 1 for square root, enter 2 for cube root, enter 3 for " \
+        "circumfirence of a circle, enter 4 for powers, enter 5 for " \
+        "factorial, enter 6 for sin, enter 7 for cos, enter 8 for tan, enter 9 for hyp," \
+        " enter 10 for log, enter 11 to create, or enter 12 to exit:"))
         if j==1:
             print("square root")
             time.sleep(1)
@@ -151,19 +155,14 @@ while main!=3:
                 x = sp.Symbol('x')
                 
                 try:
-                    # Check if the user entered an equation with an '=' sign
                     if "=" in user_input:
                         left_side, right_side = user_input.split("=")
-                        # Parse both sides and build a SymPy Equation object
                         equation = sp.Eq(sp.sympify(left_side.strip()), sp.sympify(right_side.strip()))
                         print(f"\nParsed Equation: {equation}")
-                        
-                        # Solve the equation for x
                         solutions = sp.solve(equation, x)
                         print(f"Solutions for x: {solutions}")
                         
                     else:
-                        # Handle plain expressions (no equals sign)
                         expression = sp.sympify(user_input)
                         print(f"\nParsed Expression: f(x) = {expression}")
                         print(f"Derivative: {sp.diff(expression, x)}")

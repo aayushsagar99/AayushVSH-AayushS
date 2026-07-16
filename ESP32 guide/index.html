@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Architecture & Masterclass Hub</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --code-bg: #0b0f19;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #0f172a 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header-container h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .header-container h1 span {
+            color: var(--accent-blue);
+        }
+
+        .header-container p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        /* How it Works Styles */
+        .grid-two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-two-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .spec-table th, .spec-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .spec-table th {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .architecture-block {
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .arch-item {
+            margin-bottom: 15px;
+        }
+
+        .arch-item strong {
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Course Curriculum Accordion */
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: var(--code-bg);
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: rgba(51, 65, 85, 0.5);
+        }
+
+        .accordion-title-group h3 {
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        .accordion-title-group span {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+            color: var(--text-muted);
+        }
+
+        .accordion-content {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            display: none;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+            color: var(--accent-blue);
+        }
+
+        .milestone-box {
+            margin-top: 15px;
+            background-color: rgba(74, 222, 128, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .milestone-box strong {
+            color: var(--accent-green);
+        }
+
+        /* Code Switcher Workspace */
+        .workspace-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lang-btn {
+            background-color: var(--code-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background-color: var(--accent-blue);
+            color: var(--bg-primary);
+            border-color: var(--accent-blue);
+        }
+
+        .code-container {
+            position: relative;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        pre.active {
+            display: block;
+        }
+
+        code {
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>ESP32 <span>Learning Hub</span></h1>
+            <p>Master the ultimate system-on-a-chip microcontroller from physical hardware interfaces up to production-grade cloud integration.</p>
+            <nav>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#curriculum">Course Curriculum</a>
+                <a href="#sandbox">Code Templates</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="how-it-works">
+            <h2>How the ESP32 Works</h2>
+            <div class="grid-two-col">
+                <div>
+                    <p>The ESP32 is a low-cost, low-power System-on-a-Chip (SoC) designed by Espressif Systems. Unlike simple microcontrollers that only execute code line-by-line on bare hardware, the ESP32 acts as a high-performance computational edge node capable of network multitasking.</p>
+                    
+                    <table class="spec-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Specification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Processor</td>
+                                <td>Xtensa Dual-Core 32-bit LX6, up to 240 MHz</td>
+                            </tr>
+                            <tr>
+                                <td>Memory</td>
+                                <td>520 KB Internal SRAM (Supports External Flash)</td>
+                            </tr>
+                            <tr>
+                                <td>Wireless</td>
+                                <td>802.11 b/g/n Wi-Fi & Bluetooth v4.2 / BLE</td>
+                            </tr>
+                            <tr>
+                                <td>Peripherals</td>
+                                <td>ADC, DAC, Touch Pins, SPI, I2C, UART, PWM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="architecture-block">
+                    <div class="arch-item">
+                        <strong>Silicon Architecture</strong>
+                        <p>The dual-core engine allows the separation of primary tasks. Core 0 typically runs the network stacks (Wi-Fi/Bluetooth) under the hood, while Core 1 executes your custom application logic synchronously without latency spikes.</p>
+                    </div>
+                    <div class="arch-item">
+                        <strong>RF Front-End</strong>
+                        <p>An integrated antenna switch, RF balun, power amplifier, and low-noise receive amplifier allow the chip to manage high-frequency data transmission directly through its trace antenna.</p>
+                    </div>
+                    <div class="arch-item">
+                        <strong>Power Subsystem</strong>
+                        <p>Contains an ultra-low-power (ULP) co-processor. This subsystem allows the primary CPU cores to enter a deep sleep state to preserve battery power, waking up only when an external interrupt threshold is reached.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="curriculum">
+            <h2>Complete Learning Syllabus</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Click on any module phase below to explore the training objectives, target skills, and specific completion milestones.</p>
+
+            <div class="accordion-container">
+                <div class="accordion-item active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title-group">
+                            <span>Phase 01 — Beginner</span>
+                            <h3>Hardware Foundations & Basic I/O</h3>
+                        </div>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Learn fundamental electronic principles, reading physical circuit schematics, prototyping layouts on standard breadboards, and utilizing primary input/output signals.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Managing GPIO states (Digital Input/Output)</li>
+                            <li>Pulse Width Modulation (PWM) for dimming indicators and driving servos</li>
+                            <li>Polling analog data streams via Analog-to-Digital Converters (ADC)</li>
+                        </ul>
+                        <div class="milestone-box">
+                            <strong>Phase Milestone:</strong> Construct a localized system that monitors an environmental sensor (e.g., DHT11 temperature/humidity) and switches a mechanical isolation relay when set safety thresholds are exceeded.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title-group">
+                            <span>Phase 02 — Intermediate</span>
+                            <h3>Local Networking & Communication Protocols</h3>
+                        </div>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Transition from an offline microcontroller to a functional, locally connected network node using the ESP32's built-in RF capabilities.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Configuring Wi-Fi Station (STA) and standalone Access Point (AP) modes</li>
+                            <li>Hosting lightweight, asynchronous HTTP web servers on standard Port 80</li>
+                            <li>Parsing data payloads via JSON and handling RESTful API requests locally</li>
+                        </ul>
+                        <div class="milestone-box">
+                            <strong>Phase Milestone:</strong> Spin up a responsive browser control panel dashboard served directly from the ESP32 flash storage to toggle hardware switches and display live system telemetry on your home network.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title-group">
+                            <span>Phase 03 — Advanced</span>
+                            <h3>Professional Workflows & Modular Firmware</h3>
+                        </div>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Move away from simplistic procedural script architectures and scale your development into production-grade software environments.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Setting up Visual Studio Code paired with the PlatformIO IDE extension</li>
+                            <li>Managing global dependencies, library versions, and build configurations via <code>platformio.ini</code></li>
+                            <li>Implementing strict Git version control and structuring modular multi-file firmware architectures</li>
+                        </ul>
+                        <div class="milestone-box">
+                            <strong>Phase Milestone:</strong> Convert an unstructured monolithic codebase into a cleanly separated, object-oriented firmware project utilizing dedicated header files for network managers and hardware drivers.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title-group">
+                            <span>Phase 04 — Expert</span>
+                            <h3>Real-Time OS, Security & Enterprise Cloud</h3>
+                        </div>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Unlock the absolute constraints of the silicon using native multi-threaded routines and secure enterprise cloud messaging paradigms.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Utilizing FreeRTOS to allocate distinct tasks to execution queues across Core 0 and Core 1</li>
+                            <li>Establishing safe Over-The-Air (OTA) network update endpoints</li>
+                            <li>Securing telemetry transfers with mTLS cryptographic certificates over MQTT</li>
+                        </ul>
+                        <div class="milestone-box">
+                            <strong>Phase Milestone:</strong> Deploy a fully secured edge appliance that processes local hardware streams concurrently while securely transmitting automated payload metrics directly up into an enterprise cloud architecture (such as AWS IoT Core).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sandbox">
+            <h2>Baseline Script Templates</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">Toggle between development stacks to view identical structural code configurations designed to initialize standard serial monitoring loops.</p>
+            
+            <div class="workspace-controls">
+                <button class="lang-btn active" onclick="switchLanguage('arduino')">Arduino C++ (PlatformIO)</button>
+                <button class="lang-btn" onclick="switchLanguage('python')">MicroPython</button>
+            </div>
+
+            <div class="code-container">
+<pre id="code-arduino" class="active"><code>#include &lt;Arduino.h&gt;
+
+// Setup routine runs exactly once on system startup
+void setup() {
+    // Initialize serial communication channel at 115200 bits per second
+    Serial.begin(115200);
+    while(!Serial) {
+        ; // Wait for serial port connection vector to stabilize
+    }
+    Serial.println("System initialization complete.");
+}
+
+// Loop routine cycles indefinitely while board is powered
+void loop() {
+    Serial.println("Telemetry heartbeat broadcast.");
+    delay(5000); // Thread execution pause mapped in milliseconds
+}</code></pre>
+
+<pre id="code-python"><code>import time
+import machine
+
+def main():
+    # Initialize hardware system loops
+    print("System initialization complete.")
+    
+    # Indefinite runtime cycle execution
+    while True:
+        print("Telemetry heartbeat broadcast.")
+        time.sleep(5) # Execution suspension declared in seconds
+
+if __name__ == "__main__":
+    main()</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // JavaScript Accordion Behavior Control
+        function toggleAccordion(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('active');
+        }
+
+        // JavaScript Code-Workspace Switcher Interaction Logic
+        function switchLanguage(lang) {
+            // Manage button active styling state
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Manage code block visibility state
+            const blocks = document.querySelectorAll('.code-container pre');
+            blocks.forEach(block => block.classList.remove('active'));
+
+            if (lang === 'arduino') {
+                document.getElementById('code-arduino').classList.add('active');
+                event.target.classList.add('active');
+            } else if (lang === 'python') {
+                document.getElementById('code-python').classList.add('active');
+                event.target.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
